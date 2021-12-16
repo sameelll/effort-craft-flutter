@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:effort_craft/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +16,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return const GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
   }
@@ -59,6 +64,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  int activeIndex = 0;
+
+  @override
+  void initState() {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() {
+        activeIndex++;
+
+        if (activeIndex == 4) {
+          activeIndex = 0;
+        }
+      });
+    });
+    super.initState();
+  }
+
   // Login Function
   static Future<User?> loginUsingEmailPassword(
       {required String email,
@@ -72,7 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
-        print("No user found");
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("No user found")));
       }
     }
     return user;
@@ -84,94 +106,228 @@ class _LoginScreenState extends State<LoginScreen> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return Scaffold(
+        body: SingleChildScrollView(
+            child: Padding(
+      padding: const EdgeInsets.all(20.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(
+            height: 50,
+          ),
           SizedBox(
-            width: 100,
-            height: 100,
-            child: Image.asset('assets/dragon-logo.png'),
+            height: 350,
+            child: Stack(children: [
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AnimatedOpacity(
+                  opacity: activeIndex == 0 ? 1 : 0,
+                  duration: const Duration(
+                    seconds: 1,
+                  ),
+                  curve: Curves.linear,
+                  child: Image.network(
+                    'https://ouch-cdn2.icons8.com/As6ct-Fovab32SIyMatjsqIaIjM9Jg1PblII8YAtBtQ/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNTg4/LzNmMDU5Mzc0LTky/OTQtNDk5MC1hZGY2/LTA2YTkyMDZhNWZl/NC5zdmc.png',
+                    height: 400,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AnimatedOpacity(
+                  opacity: activeIndex == 1 ? 1 : 0,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.linear,
+                  child: Image.network(
+                    'https://ouch-cdn2.icons8.com/vSx9H3yP2D4DgVoaFPbE4HVf6M4Phd-8uRjBZBnl83g/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNC84/MzcwMTY5OS1kYmU1/LTQ1ZmEtYmQ1Ny04/NTFmNTNjMTlkNTcu/c3Zn.png',
+                    height: 400,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AnimatedOpacity(
+                  opacity: activeIndex == 2 ? 1 : 0,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.linear,
+                  child: Image.network(
+                    'https://ouch-cdn2.icons8.com/fv7W4YUUpGVcNhmKcDGZp6pF1-IDEyCjSjtBB8-Kp_0/rs:fit:784:784/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvMTUv/ZjUzYTU4NDAtNjBl/Yy00ZWRhLWE1YWIt/ZGM1MWJmYjBiYjI2/LnN2Zw.png',
+                    height: 400,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: AnimatedOpacity(
+                  opacity: activeIndex == 3 ? 1 : 0,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.linear,
+                  child: Image.network(
+                    'https://ouch-cdn2.icons8.com/AVdOMf5ui4B7JJrNzYULVwT1z8NlGmlRYZTtg1F6z9E/rs:fit:784:767/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvOTY5/L2NlMTY1MWM5LTRl/ZjUtNGRmZi05MjQ3/LWYzNGQ1MzhiOTQ0/Mi5zdmc.png',
+                    height: 400,
+                  ),
+                ),
+              )
+            ]),
           ),
           const SizedBox(
-            height: 10,
-          ),
-          Text('Effortcraft',
-              style: TextStyle(
-                  color: Colors.red[600],
-                  fontSize: 38.0,
-                  fontWeight: FontWeight.bold)),
-          const SizedBox(
-            height: 34,
+            height: 20,
           ),
           TextField(
             controller: _emailController,
             cursorColor: Colors.black,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                hintText: 'user email',
-                prefixIcon: Icon(
-                  Icons.mail,
-                  color: Colors.black,
-                )),
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(0.0),
+              labelText: 'Email',
+              hintText: 'Username or e-mail',
+              labelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w400,
+              ),
+              hintStyle: const TextStyle(
+                color: Colors.grey,
+                fontSize: 14.0,
+              ),
+              prefixIcon: const Icon(
+                Iconsax.user,
+                color: Colors.black,
+                size: 18,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade200, width: 2),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              floatingLabelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
           ),
           const SizedBox(
             height: 26,
           ),
           TextField(
             controller: _passwordController,
-            cursorColor: Colors.black,
             obscureText: true,
-            decoration: const InputDecoration(
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                hintText: 'user password',
-                prefixIcon: Icon(
-                  Icons.vpn_key_rounded,
-                  color: Colors.black,
-                )),
+            cursorColor: Colors.black,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(0.0),
+              labelText: 'Password',
+              hintText: 'Password',
+              hintStyle: const TextStyle(
+                color: Colors.grey,
+                fontSize: 14.0,
+              ),
+              labelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w400,
+              ),
+              prefixIcon: const Icon(
+                Iconsax.key,
+                color: Colors.black,
+                size: 18,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade200, width: 2),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              floatingLabelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.black, width: 1.5),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
           ),
           const SizedBox(
             height: 12,
           ),
-          Text(
-            "Don't remember your password?",
-            style: TextStyle(
-              color: Colors.blue[700],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400),
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          MaterialButton(
+            onPressed: () async {
+              User? user = await loginUsingEmailPassword(
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                  context: context);
+              if (user != null) {
+                Get.to(() => const ProfileScreen());
+              }
+            },
+            height: 45,
+            color: Colors.black,
+            child: const Text(
+              "Login",
+              style: TextStyle(color: Colors.white, fontSize: 16.0),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
           ),
           const SizedBox(
-            height: 66,
+            height: 30,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width / 1.3,
-            height: 50,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(35.0),
-                color: Colors.red[600]),
-            child: MaterialButton(
-              onPressed: () async {
-                User? user = await loginUsingEmailPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                    context: context);
-                if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const ProfileScreen()));
-                }
-              },
-              child: const Text('Login'),
-            ),
-          )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Don\'t have an account?',
+                style: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'Register',
+                  style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400),
+                ),
+              )
+            ],
+          ),
         ],
       ),
-    );
+    )));
   }
 }
