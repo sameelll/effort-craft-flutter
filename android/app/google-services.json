@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "612184202843",
+    "project_id": "effortcraft-fb063",
+    "storage_bucket": "effortcraft-fb063.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612184202843:android:4ef64410665880d13c697e",
+        "android_client_info": {
+          "package_name": "com.example.effort_craft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612184202843-3arrv9t523o53828acpikm96lba1edao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6fzMAzw64HCYLPB2JvwIRHjX6cNd62_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612184202843-3arrv9t523o53828acpikm96lba1edao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

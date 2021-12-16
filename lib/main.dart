@@ -1,3 +1,6 @@
+import 'package:effort_craft/profile_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,9 +28,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Initialize firebase app
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: LoginScreen());
+    return Scaffold(
+        body: FutureBuilder(
+      future: _initializeFirebase(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return const LoginScreen();
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    ));
   }
 }
 
@@ -39,8 +59,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // Login Function
+  static Future<User?> loginUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        print("No user found");
+      }
+    }
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Creating the textfield controller
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -59,19 +102,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.red[600],
                   fontSize: 38.0,
                   fontWeight: FontWeight.bold)),
-          // const Text(
-          //   'Login to Your App',
-          //   style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: 32.0,
-          //       fontWeight: FontWeight.bold),
-          // ),
           const SizedBox(
             height: 34,
           ),
-          const TextField(
+          TextField(
+            controller: _emailController,
+            cursorColor: Colors.black,
             keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
+                border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)),
                 hintText: 'user email',
                 prefixIcon: Icon(
                   Icons.mail,
@@ -81,9 +123,15 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 26,
           ),
-          const TextField(
+          TextField(
+            controller: _passwordController,
+            cursorColor: Colors.black,
             obscureText: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
+                border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)),
                 hintText: 'user password',
                 prefixIcon: Icon(
                   Icons.vpn_key_rounded,
@@ -109,7 +157,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(35.0),
                 color: Colors.red[600]),
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () async {
+                User? user = await loginUsingEmailPassword(
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                    context: context);
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()));
+                }
+              },
               child: const Text('Login'),
             ),
           )
