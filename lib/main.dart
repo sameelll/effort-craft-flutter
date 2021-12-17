@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LandingScreen(),
+      home: HomeScreen(),
     );
   }
 }
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _initializeFirebase(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return const LoginScreen();
+          return const LandingScreen();
         }
         return const Center(
           child: CircularProgressIndicator(),
