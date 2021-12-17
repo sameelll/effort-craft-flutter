@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 void main() {
   runApp(const MyApp());
@@ -67,20 +66,6 @@ class _LandingScreenState extends State<LandingScreen> {
   int activeIndex = 0;
 
   @override
-  void initState() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
-      setState(() {
-        activeIndex++;
-
-        if (activeIndex == 4) {
-          activeIndex = 0;
-        }
-      });
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -91,88 +76,6 @@ class _LandingScreenState extends State<LandingScreen> {
             children: [
               const SizedBox(
                 height: 70,
-              ),
-              SizedBox(
-                height: 350,
-                child: Stack(children: [
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: AnimatedOpacity(
-                      opacity: activeIndex == 0 ? 1 : 0,
-                      duration: const Duration(
-                        seconds: 1,
-                      ),
-                      curve: Curves.linear,
-                      child: Image.network(
-                        'https://freepngimg.com/thumb/minecraft/5-2-minecraft-enderman-png.png',
-                        height: 400,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: AnimatedOpacity(
-                      opacity: activeIndex == 1 ? 1 : 0,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.linear,
-                      child: Image.network(
-                        'https://pngimg.com/uploads/minecraft/minecraft_PNG94.png',
-                        height: 400,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: AnimatedOpacity(
-                      opacity: activeIndex == 2 ? 1 : 0,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.linear,
-                      child: Image.network(
-                        'https://pngimg.com/uploads/minecraft/minecraft_PNG47.png',
-                        height: 400,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: AnimatedOpacity(
-                      opacity: activeIndex == 3 ? 1 : 0,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.linear,
-                      child: Image.network(
-                        'https://pngimg.com/uploads/minecraft/minecraft_PNG71.png',
-                        height: 400,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: AnimatedOpacity(
-                      opacity: activeIndex == 3 ? 1 : 0,
-                      duration: const Duration(seconds: 1),
-                      curve: Curves.linear,
-                      child: Image.network(
-                        'https://pngimg.com/uploads/minecraft/minecraft_PNG48.png',
-                        height: 400,
-                      ),
-                    ),
-                  )
-                ]),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.04,
@@ -303,18 +206,6 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-            Container(padding: const EdgeInsets.only(left: 15, top: 83),
-              child: Row(
-               children: [
-                   InkWell(
-                   onTap: () {
-                     Get.back();
-                    },
-                   child: const Icon(Icons.arrow_back_ios,
-                        size: 20, color: Colors.black),
-                ),
-              ],
-             ),),
             Container(
               padding: const EdgeInsets.only(left: 35, top: 130),
               child: const Text(
@@ -365,10 +256,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    fontSize: 27, fontWeight: FontWeight.w700),
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: const Icon(Icons.arrow_back_ios,
+                                    size: 20, color: Colors.black),
                               ),
                               CircleAvatar(
                                 radius: 30,
@@ -435,179 +328,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-
-    // return Scaffold(
-    //     backgroundColor: Colors.grey[200],
-    //     body: SingleChildScrollView(
-    //         child: Container(
-    //       width: MediaQuery.of(context).size.width,
-    //       padding: const EdgeInsets.all(20.0),
-    //       child: Column(
-    //         children: [
-    //           const SizedBox(
-    //             height: 50,
-    //           ),
-    //           Row(
-    //             children: [
-    //               InkWell(
-    //                 onTap: () {
-    //                   Get.back();
-    //                 },
-    //                 child: const Icon(Icons.arrow_back_ios,
-    //                     size: 20, color: Colors.black),
-    //               ),
-    //             ],
-    //           ),
-    //           const SizedBox(
-    //             height: 200,
-    //           ),
-    //           TextField(
-    //             controller: _emailController,
-    //             cursorColor: Colors.black,
-    //             decoration: InputDecoration(
-    //               contentPadding: const EdgeInsets.all(0.0),
-    //               labelText: 'Email',
-    //               hintText: 'Username or e-mail',
-    //               labelStyle: const TextStyle(
-    //                 color: Colors.black,
-    //                 fontSize: 14.0,
-    //                 fontWeight: FontWeight.w400,
-    //               ),
-    //               hintStyle: const TextStyle(
-    //                 color: Colors.grey,
-    //                 fontSize: 14.0,
-    //               ),
-    //               prefixIcon: const Icon(
-    //                 Iconsax.user,
-    //                 color: Colors.black,
-    //                 size: 18,
-    //               ),
-    //               enabledBorder: OutlineInputBorder(
-    //                 borderSide:
-    //                     const BorderSide(color: Colors.deepPurple, width: 3),
-    //                 borderRadius: BorderRadius.circular(30.0),
-    //               ),
-    //               floatingLabelStyle: const TextStyle(
-    //                 color: Colors.green,
-    //                 fontSize: 18.0,
-    //               ),
-    //               focusedBorder: OutlineInputBorder(
-    //                 borderSide: const BorderSide(color: Colors.green, width: 3),
-    //                 borderRadius: BorderRadius.circular(30.0),
-    //               ),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 26,
-    //           ),
-    //           TextField(
-    //             controller: _passwordController,
-    //             obscureText: true,
-    //             cursorColor: Colors.black,
-    //             decoration: InputDecoration(
-    //               contentPadding: const EdgeInsets.all(0.0),
-    //               labelText: 'Password',
-    //               hintText: 'Password',
-    //               hintStyle: const TextStyle(
-    //                 color: Colors.grey,
-    //                 fontSize: 14.0,
-    //               ),
-    //               labelStyle: const TextStyle(
-    //                 color: Colors.black,
-    //                 fontSize: 14.0,
-    //                 fontWeight: FontWeight.w400,
-    //               ),
-    //               prefixIcon: const Icon(
-    //                 Iconsax.key,
-    //                 color: Colors.black,
-    //                 size: 18,
-    //               ),
-    //               enabledBorder: OutlineInputBorder(
-    //                 borderSide:
-    //                     const BorderSide(color: Colors.deepPurple, width: 3),
-    //                 borderRadius: BorderRadius.circular(30.0),
-    //               ),
-    //               floatingLabelStyle: const TextStyle(
-    //                 color: Colors.black,
-    //                 fontSize: 18.0,
-    //               ),
-    //               focusedBorder: OutlineInputBorder(
-    //                 borderSide: const BorderSide(color: Colors.green, width: 3),
-    //                 borderRadius: BorderRadius.circular(30.0),
-    //               ),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 12,
-    //           ),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.end,
-    //             children: [
-    //               TextButton(
-    //                 onPressed: () {},
-    //                 child: const Text(
-    //                   'Forgot Password?',
-    //                   style: TextStyle(
-    //                       color: Colors.black,
-    //                       fontSize: 14.0,
-    //                       fontWeight: FontWeight.w400),
-    //                 ),
-    //               )
-    //             ],
-    //           ),
-    //           const SizedBox(
-    //             height: 30,
-    //           ),
-    //           MaterialButton(
-    //             onPressed: () async {
-    //               User? user = await loginUsingEmailPassword(
-    //                   email: _emailController.text,
-    //                   password: _passwordController.text,
-    //                   context: context);
-    //               if (user != null) {
-    //                 Get.to(() => const ProfileScreen());
-    //               }
-    //             },
-    //             height: 45,
-    //             color: Colors.lightGreen[800]?.withOpacity(0.9),
-    //             child: const Text(
-    //               "Login",
-    //               style: TextStyle(color: Colors.white, fontSize: 16.0),
-    //             ),
-    //             padding:
-    //                 const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-    //             shape: RoundedRectangleBorder(
-    //               borderRadius: BorderRadius.circular(30.0),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             height: 25,
-    //           ),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.center,
-    //             children: [
-    //               Text(
-    //                 'Don\'t have an account?',
-    //                 style: TextStyle(
-    //                     color: Colors.grey.shade600,
-    //                     fontSize: 14.0,
-    //                     fontWeight: FontWeight.w400),
-    //               ),
-    //               TextButton(
-    //                 onPressed: () {},
-    //                 child: const Text(
-    //                   'Register',
-    //                   style: TextStyle(
-    //                       color: Colors.deepPurple,
-    //                       fontSize: 14.0,
-    //                       fontWeight: FontWeight.w400),
-    //                 ),
-    //               )
-    //             ],
-    //           ),
-    //         ],
-    //       ),
-    //     )));
   }
 }
 
