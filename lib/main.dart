@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Create the main layout(UI)
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -67,11 +65,14 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/landing.jpg'), fit: BoxFit.cover),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
@@ -80,80 +81,136 @@ class _LandingScreenState extends State<LandingScreen> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.04,
               ),
-              const SizedBox(
-                child: Text(
-                  'Effortcraft',
-                  style: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 45,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(
-                height: 1,
-              ),
-              SizedBox(
-                child: Text(
-                  'Reflect Your Effort!',
-                  style: TextStyle(
-                    color: Colors.pink[300],
-                    fontSize: 16,
-                  ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 5, color: Colors.red.withOpacity(0.0))
+                    ]),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      child: Text(
+                        '        Effortcraft              ',
+                        style: TextStyle(
+                            color: Colors.deepPurple[50],
+                            fontSize: 45,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    SizedBox(
+                      child: Text(
+                        'Reflect Your Effort!',
+                        style: TextStyle(
+                          color: Colors.pink[300],
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.07,
               ),
+              // Container(
+              //   height: 45,
+              //   width: MediaQuery.of(context).size.width * 0.6,
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xffebebeb).withOpacity(0.2),
+              //     borderRadius: const BorderRadius.all(Radius.circular(30)),
+              //   ),
+              //   child: MaterialButton(
+              //     onPressed: () {
+              //       Get.to(() => const LoginScreen());
+              //     },
+              //     height: 45,
+              //     color: Colors.purple[500]?.withOpacity(0.4),
+              //     child: const Text(
+              //       "Login",
+              //       style: TextStyle(color: Colors.white, fontSize: 16.0),
+              //     ),
+              //     padding:
+              //         const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(30.0),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 14,
+              // ),
+              // Container(
+              //   height: 45,
+              //   width: MediaQuery.of(context).size.width * 0.6,
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xffebebeb).withOpacity(0.2),
+              //     borderRadius: const BorderRadius.all(Radius.circular(30)),
+              //   ),
+              //   child: MaterialButton(
+              //     onPressed: () {
+              //       Get.to(() => const SignUpScreen());
+              //     },
+              //     height: 45,
+              //     color: Colors.lightGreen[800]?.withOpacity(0.7),
+              //     child: const Text(
+              //       "Sign Up",
+              //       style: TextStyle(color: Colors.white, fontSize: 16.0),
+              //     ),
+              //     padding:
+              //         const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(30.0),
+              //     ),
+              //   ),
+              // ),
               Container(
-                height: 45,
-                width: MediaQuery.of(context).size.width * 0.6,
-                decoration: const BoxDecoration(
-                  color: Color(0xffebebeb),
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                child: MaterialButton(
-                  onPressed: () {
-                    Get.to(() => const LoginScreen());
-                  },
-                  height: 45,
-                  color: Colors.pink[500]?.withOpacity(0.8),
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white, fontSize: 16.0),
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
+                height: 370,
               ),
-              const SizedBox(
-                height: 14,
-              ),
-              Container(
-                height: 45,
-                width: MediaQuery.of(context).size.width * 0.6,
-                decoration: const BoxDecoration(
-                  color: Color(0xffebebeb),
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                child: MaterialButton(
-                  onPressed: () {
-                    Get.to(() => const SignUpScreen());
-                  },
-                  height: 45,
-                  color: Colors.lightGreen[800]?.withOpacity(0.9),
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.white, fontSize: 16.0),
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
+              Column(
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Container(
+                      height: 50,
+                      width: 112,
+                      decoration: BoxDecoration(
+                        color: const Color(0xffebebeb).withOpacity(0.2),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            bottomLeft: Radius.circular(15)),
+                      ),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Get.to(() => const LoginScreen());
+                        },
+                        height: 50,
+                        color: Colors.grey[100]?.withOpacity(0.4),
+                        child: const Text(
+                          "Effort!",
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23.0),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 2),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              bottomLeft: Radius.circular(15)),
+                        ),
+                      ),
+                    )
+                  ]),
+                ],
               ),
             ],
           ),
