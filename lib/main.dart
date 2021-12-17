@@ -254,15 +254,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 40,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              const SizedBox(
+                                width: 6,
+                              ),
                               InkWell(
                                 onTap: () {
                                   Get.back();
                                 },
                                 child: const Icon(Icons.arrow_back_ios,
-                                    size: 20, color: Colors.black),
+                                    size: 31, color: Colors.black),
                               ),
+                              Expanded(child: Container()),
                               CircleAvatar(
                                 radius: 30,
                                 backgroundColor: const Color(0xff4c505b),
