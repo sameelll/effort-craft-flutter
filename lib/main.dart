@@ -1,12 +1,15 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:effort_craft/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -30,6 +33,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Initialize forestore
+  final Stream<QuerySnapshot> users =
+      FirebaseFirestore.instance.collection('users').snapshots();
   // Initialize firebase app
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
@@ -270,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.to(const HomeScreen());
+              Get.to(() => const HomeScreen());
             },
           ),
         ),
@@ -295,6 +301,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           TextField(
+                            keyboardType: TextInputType.emailAddress,
                             controller: _emailController,
                             style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
@@ -361,7 +368,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  Get.to(const SignUpScreen());
+                                  Get.to(() => const SignUpScreen());
                                 },
                                 child: const Text(
                                   'Sign Up',
@@ -407,11 +414,33 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  static Future<User?> signUpUsingEmailPassword(
+      {required String email,
+      required String name,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("No user found")));
+      }
+    }
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
     TextEditingController _nameController = TextEditingController();
+
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     return Container(
       decoration: const BoxDecoration(
@@ -429,7 +458,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.to(const HomeScreen());
+              Get.to(() => const HomeScreen());
             },
           ),
         ),
@@ -479,6 +508,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 30,
                           ),
                           TextField(
+                            keyboardType: TextInputType.emailAddress,
                             controller: _emailController,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
@@ -544,7 +574,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 backgroundColor: const Color(0xff4c505b),
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      User? user =
+                                          await signUpUsingEmailPassword(
+                                              email: _emailController.text,
+                                              password:
+                                                  _passwordController.text,
+                                              context: context,
+                                              name: _nameController.text);
+                                      await users.add({
+                                        'email': _emailController.text,
+                                        'name': _nameController.text,
+                                      });
+                                      if (user != null) {
+                                        Get.to(() => const LoginScreen());
+                                      }
+                                    },
                                     icon: const Icon(
                                       Icons.arrow_forward,
                                     )),
@@ -559,7 +604,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  Get.to(const LoginScreen());
+                                  Get.to(() => const LoginScreen());
                                 },
                                 child: const Text(
                                   'Sign In',
