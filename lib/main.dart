@@ -264,6 +264,15 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Get.to(const HomeScreen());
+            },
+          ),
         ),
         body: Stack(
           children: [
@@ -400,6 +409,10 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+    TextEditingController _nameController = TextEditingController();
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -410,6 +423,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Get.to(const HomeScreen());
+            },
+          ),
         ),
         body: Stack(
           children: [
@@ -432,6 +454,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Column(
                         children: [
                           TextField(
+                            controller: _nameController,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -456,6 +479,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 30,
                           ),
                           TextField(
+                            controller: _emailController,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -480,6 +504,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 30,
                           ),
                           TextField(
+                            controller: _passwordController,
                             style: const TextStyle(color: Colors.white),
                             obscureText: true,
                             decoration: InputDecoration(
