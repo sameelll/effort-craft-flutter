@@ -263,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/login.png'), fit: BoxFit.cover),
+            image: AssetImage('assets/login.jpg'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -273,7 +273,7 @@ class _LoginScreenState extends State<LoginScreen> {
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
-              color: Colors.black,
+              color: Colors.white,
             ),
             onPressed: () {
               Get.to(() => const HomeScreen());
@@ -283,10 +283,10 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 35, top: 13),
-              child: const Text(
+              padding: const EdgeInsets.only(left: 35, top: 172),
+              child: Text(
                 'Welcome\nBack',
-                style: TextStyle(color: Colors.white, fontSize: 33),
+                style: TextStyle(color: Colors.cyan[200], fontSize: 30),
               ),
             ),
             SingleChildScrollView(
@@ -313,7 +313,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )),
                           ),
                           const SizedBox(
-                            height: 30,
+                            height: 25,
                           ),
                           TextField(
                             controller: _passwordController,
@@ -328,19 +328,50 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )),
                           ),
                           const SizedBox(
-                            height: 40,
+                            height: 4,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Sign in',
-                                style: TextStyle(
-                                    fontSize: 27, fontWeight: FontWeight.w700),
+                              TextButton(
+                                onPressed: () {
+                                  Get.to(() => const SignUpScreen());
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.cyan[200],
+                                      fontSize: 16),
+                                ),
+                                style: const ButtonStyle(),
+                              ),
+                              TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Forgot Password',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.cyan[200],
+                                      fontSize: 16,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                width: 268,
                               ),
                               CircleAvatar(
-                                radius: 30,
-                                backgroundColor: const Color(0xff4c505b),
+                                radius: 27,
+                                backgroundColor:
+                                    Colors.green[700]?.withOpacity(0.9),
                                 child: IconButton(
                                     color: Colors.white,
                                     onPressed: () async {
@@ -363,35 +394,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 40,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Get.to(() => const SignUpScreen());
-                                },
-                                child: const Text(
-                                  'Sign Up',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xff4c505b),
-                                      fontSize: 18),
-                                ),
-                                style: const ButtonStyle(),
-                              ),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Forgot Password',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xff4c505b),
-                                      fontSize: 18,
-                                    ),
-                                  )),
-                            ],
-                          )
                         ],
                       ),
                     )
@@ -445,7 +447,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/register.png'), fit: BoxFit.cover),
+            image: AssetImage('assets/signUp.jpg'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -455,7 +457,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,
-              color: Colors.black,
+              color: Colors.white,
             ),
             onPressed: () {
               Get.to(() => const HomeScreen());
@@ -466,9 +468,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             Container(
               padding: const EdgeInsets.only(left: 35, top: 30),
-              child: const Text(
+              child: Text(
                 'Create\nAccount',
-                style: TextStyle(color: Colors.white, fontSize: 33),
+                style: TextStyle(color: Colors.cyan[200], fontSize: 33),
               ),
             ),
             SingleChildScrollView(
@@ -562,18 +564,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.cyan[200],
                                     fontSize: 27,
                                     fontWeight: FontWeight.w700),
                               ),
                               CircleAvatar(
-                                radius: 30,
-                                backgroundColor: const Color(0xff4c505b),
+                                radius: 27,
+                                backgroundColor: Colors.yellow[400],
                                 child: IconButton(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     onPressed: () async {
                                       User? user =
                                           await signUpUsingEmailPassword(
@@ -606,12 +608,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: () {
                                   Get.to(() => const LoginScreen());
                                 },
-                                child: const Text(
+                                child: Text(
                                   'Sign In',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: Colors.white,
+                                      color: Colors.cyan[200],
                                       fontSize: 18),
                                 ),
                                 style: const ButtonStyle(),

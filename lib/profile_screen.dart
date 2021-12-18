@@ -14,7 +14,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
-
     return Scaffold(
       body: Container(
           height: 115,
