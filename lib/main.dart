@@ -68,7 +68,7 @@ class _LandingScreenState extends State<LandingScreen> {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('assets/landing.jpg'), fit: BoxFit.cover),
+            image: AssetImage('assets/landing_dark.jpg'), fit: BoxFit.cover),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -76,7 +76,7 @@ class _LandingScreenState extends State<LandingScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 70,
+                height: 60,
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.04,
@@ -98,7 +98,7 @@ class _LandingScreenState extends State<LandingScreen> {
                       child: Text(
                         '        Effortcraft              ',
                         style: TextStyle(
-                            color: Colors.deepPurple[50],
+                            color: Colors.cyan[400],
                             fontSize: 45,
                             fontWeight: FontWeight.bold),
                       ),
@@ -110,7 +110,7 @@ class _LandingScreenState extends State<LandingScreen> {
                       child: Text(
                         'Reflect Your Effort!',
                         style: TextStyle(
-                          color: Colors.pink[300],
+                          color: Colors.red[100],
                           fontSize: 16,
                         ),
                       ),
@@ -173,7 +173,7 @@ class _LandingScreenState extends State<LandingScreen> {
               //   ),
               // ),
               Container(
-                height: 370,
+                height: 380,
               ),
               Column(
                 children: [
@@ -184,28 +184,28 @@ class _LandingScreenState extends State<LandingScreen> {
                       decoration: BoxDecoration(
                         color: const Color(0xffebebeb).withOpacity(0.2),
                         borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            bottomLeft: Radius.circular(15)),
+                            topLeft: Radius.circular(30),
+                            bottomLeft: Radius.circular(30)),
                       ),
                       child: MaterialButton(
                         onPressed: () {
                           Get.to(() => const LoginScreen());
                         },
                         height: 50,
-                        color: Colors.grey[100]?.withOpacity(0.4),
+                        color: Colors.grey[700],
                         child: const Text(
-                          "Effort!",
+                          "Start",
                           style: TextStyle(
-                              color: Colors.green,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 23.0),
                         ),
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 2),
+                            vertical: 2, horizontal: 2),
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              bottomLeft: Radius.circular(15)),
+                              topLeft: Radius.circular(30),
+                              bottomLeft: Radius.circular(30)),
                         ),
                       ),
                     )

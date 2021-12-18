@@ -64,7 +64,7 @@ flutter:
   assets:
     - assets/login.png
     - assets/register.png
-    - assets/landing.jpg
+    - assets/landing_dark.jpg
 
   #   - images/a_dot_ham.jpeg
 
