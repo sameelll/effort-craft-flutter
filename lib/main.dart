@@ -192,11 +192,11 @@ class _LandingScreenState extends State<LandingScreen> {
                           Get.to(() => const LoginScreen());
                         },
                         height: 50,
-                        color: Colors.grey[700],
+                        color: Colors.grey[100]?.withOpacity(0.9),
                         child: const Text(
                           "Start",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.deepPurpleAccent,
                               fontWeight: FontWeight.bold,
                               fontSize: 23.0),
                         ),
