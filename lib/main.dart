@@ -251,17 +251,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           TextField(
-                            keyboardType: TextInputType.emailAddress,
-                            controller: _emailController,
-                            style: const TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                                fillColor: Colors.grey.shade200,
-                                filled: true,
-                                hintText: "Email",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                          ),
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _emailController,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
+                                  fillColor: Colors.grey.shade200,
+                                  filled: true,
+                                  hintText: "Email",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: const BorderSide(
+                                          color: Colors.green, width: 2.8)))),
                           const SizedBox(
                             height: 25,
                           ),
@@ -275,7 +277,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: "Password",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                )),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 2.8))),
                           ),
                           const SizedBox(
                             height: 4,
@@ -443,7 +449,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: "Name",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                )),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 2.8))),
                           ),
                           const SizedBox(
                             height: 30,
@@ -458,7 +468,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: "Email",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                )),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 2.8))),
                           ),
                           const SizedBox(
                             height: 30,
@@ -473,7 +487,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintText: "Password",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                )),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 2.8))),
                           ),
                           const SizedBox(
                             height: 40,
