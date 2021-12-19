@@ -600,7 +600,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           isLoading = true;
                                         });
                                         await Future.delayed(
-                                            const Duration(seconds: 2));
+                                            const Duration(seconds: 1));
                                         setState(() {
                                           isLoading = false;
                                         });
@@ -627,7 +627,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           isLoading = true;
                                         });
                                         await Future.delayed(
-                                            const Duration(seconds: 2));
+                                            const Duration(seconds: 1));
                                         setState(() {
                                           isLoading = false;
                                         });
