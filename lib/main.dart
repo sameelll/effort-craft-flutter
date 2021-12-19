@@ -340,7 +340,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (user != null) {
                                         Get.to(() => const ProfileScreen());
                                       } else {
-
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text(
+                                                    "Please check your Email and password")));
                                       }
                                     },
                                     icon: const Icon(
@@ -393,6 +396,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
     return user;
   }
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -448,7 +453,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             decoration: InputDecoration(
                                 fillColor: Colors.grey.shade300,
                                 filled: true,
-                                hintText: "Name",
+                                hintText: "Full Name",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -521,17 +526,104 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                   _passwordController.text,
                                               context: context,
                                               name: _nameController.text);
+
                                       await users.add({
                                         'email': _emailController.text,
                                         'name': _nameController.text,
                                       });
                                       if (user != null) {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(seconds: 3));
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                duration: Duration(seconds: 4),
+                                                elevation: 0,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 16,
+                                                    horizontal: 12),
+                                                shape: StadiumBorder(),
+                                                backgroundColor: Colors.green,
+                                                content: Text(
+                                                  "Registration Successful! Please login!",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                  textAlign: TextAlign.center,
+                                                )));
+
                                         Get.to(() => const LoginScreen());
+                                      } else if (_passwordController
+                                              .text.length <
+                                          6) {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(seconds: 2));
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                duration: Duration(seconds: 4),
+                                                elevation: 0,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 16,
+                                                    horizontal: 12),
+                                                shape: StadiumBorder(),
+                                                backgroundColor:
+                                                    Colors.redAccent,
+                                                content: Text(
+                                                  "Your password needs to be at least 6 characters long!",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                  textAlign: TextAlign.center,
+                                                )));
+                                      } else {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(seconds: 2));
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                duration: Duration(seconds: 4),
+                                                elevation: 0,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 16,
+                                                    horizontal: 12),
+                                                shape: StadiumBorder(),
+                                                backgroundColor:
+                                                    Colors.redAccent,
+                                                content: Text(
+                                                  "This email is already in use. Please use another one.",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                  textAlign: TextAlign.center,
+                                                )));
                                       }
                                     },
-                                    icon: const Icon(
-                                      Icons.arrow_forward,
-                                    )),
+                                    icon: isLoading
+                                        ? const CircularProgressIndicator(
+                                            color: Colors.black,
+                                          )
+                                        : const Icon(
+                                            Icons.arrow_forward,
+                                          )),
                               )
                             ],
                           ),
