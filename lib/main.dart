@@ -127,57 +127,6 @@ class _LandingScreenState extends State<LandingScreen> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.07,
               ),
-              // Container(
-              //   height: 45,
-              //   width: MediaQuery.of(context).size.width * 0.6,
-              //   decoration: BoxDecoration(
-              //     color: const Color(0xffebebeb).withOpacity(0.2),
-              //     borderRadius: const BorderRadius.all(Radius.circular(30)),
-              //   ),
-              //   child: MaterialButton(
-              //     onPressed: () {
-              //       Get.to(() => const LoginScreen());
-              //     },
-              //     height: 45,
-              //     color: Colors.purple[500]?.withOpacity(0.4),
-              //     child: const Text(
-              //       "Login",
-              //       style: TextStyle(color: Colors.white, fontSize: 16.0),
-              //     ),
-              //     padding:
-              //         const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(30.0),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 14,
-              // ),
-              // Container(
-              //   height: 45,
-              //   width: MediaQuery.of(context).size.width * 0.6,
-              //   decoration: BoxDecoration(
-              //     color: const Color(0xffebebeb).withOpacity(0.2),
-              //     borderRadius: const BorderRadius.all(Radius.circular(30)),
-              //   ),
-              //   child: MaterialButton(
-              //     onPressed: () {
-              //       Get.to(() => const SignUpScreen());
-              //     },
-              //     height: 45,
-              //     color: Colors.lightGreen[800]?.withOpacity(0.7),
-              //     child: const Text(
-              //       "Sign Up",
-              //       style: TextStyle(color: Colors.white, fontSize: 16.0),
-              //     ),
-              //     padding:
-              //         const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(30.0),
-              //     ),
-              //   ),
-              // ),
               Container(
                 height: 380,
               ),
@@ -305,7 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: _emailController,
                             style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                fillColor: Colors.grey.shade100,
+                                fillColor: Colors.grey.shade200,
                                 filled: true,
                                 hintText: "Email",
                                 border: OutlineInputBorder(
@@ -320,7 +269,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: const TextStyle(),
                             obscureText: true,
                             decoration: InputDecoration(
-                                fillColor: Colors.grey.shade100,
+                                fillColor: Colors.grey.shade200,
                                 filled: true,
                                 hintText: "Password",
                                 border: OutlineInputBorder(
@@ -486,22 +435,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           TextField(
                             controller: _nameController,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
                                 hintText: "Name",
-                                hintStyle: const TextStyle(color: Colors.white),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
@@ -512,22 +450,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           TextField(
                             keyboardType: TextInputType.emailAddress,
                             controller: _emailController,
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
                                 hintText: "Email",
-                                hintStyle: const TextStyle(color: Colors.white),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
@@ -537,23 +464,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           TextField(
                             controller: _passwordController,
-                            style: const TextStyle(color: Colors.white),
                             obscureText: true,
+                            style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Colors.black,
-                                  ),
-                                ),
+                                fillColor: Colors.grey.shade200,
+                                filled: true,
                                 hintText: "Password",
-                                hintStyle: const TextStyle(color: Colors.white),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 )),
