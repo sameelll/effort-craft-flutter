@@ -99,10 +99,11 @@ class _LandingScreenState extends State<LandingScreen> {
                           blurRadius: 5, color: Colors.red.withOpacity(0.0))
                     ]),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       child: Text(
-                        '        Effortcraft              ',
+                        'Effortcraft',
                         style: TextStyle(
                             color: Colors.cyan[400],
                             fontSize: 45,
