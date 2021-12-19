@@ -15,7 +15,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return Scaffold(
+      backgroundColor: const Color(0xFF393E46),
       body: Container(
+
           height: 115,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: StreamBuilder<QuerySnapshot>(

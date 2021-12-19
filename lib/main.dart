@@ -196,13 +196,12 @@ class _LoginScreenState extends State<LoginScreen> {
           email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("No user found")));
-      }
+      if (e.code == "user-not-found") {}
     }
     return user;
   }
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -329,26 +328,64 @@ class _LoginScreenState extends State<LoginScreen> {
                                 backgroundColor:
                                     Colors.green[700]?.withOpacity(0.9),
                                 child: IconButton(
-                                    color: Colors.white,
-                                    onPressed: () async {
-                                      User? user =
-                                          await loginUsingEmailPassword(
-                                              email: _emailController.text,
-                                              password:
-                                                  _passwordController.text,
-                                              context: context);
-                                      if (user != null) {
-                                        Get.to(() => const ProfileScreen());
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    "Please check your Email and password")));
-                                      }
-                                    },
-                                    icon: const Icon(
-                                      Icons.arrow_forward,
-                                    )),
+                                  color: Colors.white,
+                                  onPressed: () async {
+                                    User? user = await loginUsingEmailPassword(
+                                        email: _emailController.text,
+                                        password: _passwordController.text,
+                                        context: context);
+                                    if (user != null) {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      await Future.delayed(
+                                          const Duration(seconds: 1));
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              duration: Duration(seconds: 5),
+                                              elevation: 0,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 16,
+                                                  horizontal: 110),
+                                              shape: StadiumBorder(),
+                                              backgroundColor: Colors.green,
+                                              content: Text(
+                                                "Welcome Back!",
+                                                style: TextStyle(fontSize: 18),
+                                                textAlign: TextAlign.center,
+                                              )));
+                                      Get.to(() => const ProfileScreen());
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              duration: Duration(seconds: 3),
+                                              elevation: 0,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 16, horizontal: 12),
+                                              shape: StadiumBorder(),
+                                              backgroundColor: Colors.redAccent,
+                                              content: Text(
+                                                "Please check your email or password!",
+                                                style: TextStyle(fontSize: 18),
+                                                textAlign: TextAlign.center,
+                                              )));
+                                    }
+                                  },
+                                  icon: isLoading
+                                      ? const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : const Icon(
+                                          Icons.arrow_forward,
+                                        ),
+                                ),
                               )
                             ],
                           ),
@@ -389,10 +426,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           email: email, password: password);
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("No user found")));
-      }
+      if (e.code == "user-not-found") {}
     }
     return user;
   }
