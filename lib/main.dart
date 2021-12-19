@@ -255,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller: _emailController,
                               style: const TextStyle(color: Colors.black),
                               decoration: InputDecoration(
-                                  fillColor: Colors.grey.shade200,
+                                  fillColor: Colors.grey.shade300,
                                   filled: true,
                                   hintText: "Email",
                                   border: OutlineInputBorder(
@@ -272,7 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: const TextStyle(),
                             obscureText: true,
                             decoration: InputDecoration(
-                                fillColor: Colors.grey.shade200,
+                                fillColor: Colors.grey.shade300,
                                 filled: true,
                                 hintText: "Password",
                                 border: OutlineInputBorder(
@@ -339,6 +339,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                               context: context);
                                       if (user != null) {
                                         Get.to(() => const ProfileScreen());
+                                      } else {
+
                                       }
                                     },
                                     icon: const Icon(
@@ -444,7 +446,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _nameController,
                             style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                fillColor: Colors.grey.shade200,
+                                fillColor: Colors.grey.shade300,
                                 filled: true,
                                 hintText: "Name",
                                 border: OutlineInputBorder(
@@ -463,7 +465,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             controller: _emailController,
                             style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                fillColor: Colors.grey.shade200,
+                                fillColor: Colors.grey.shade300,
                                 filled: true,
                                 hintText: "Email",
                                 border: OutlineInputBorder(
@@ -482,7 +484,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             obscureText: true,
                             style: const TextStyle(color: Colors.black),
                             decoration: InputDecoration(
-                                fillColor: Colors.grey.shade200,
+                                fillColor: Colors.grey.shade300,
                                 filled: true,
                                 hintText: "Password",
                                 border: OutlineInputBorder(
