@@ -5,7 +5,10 @@ import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   final User? user;
-  const ProfileScreen({Key? key, this.user}) : super(key: key);
+
+  final String? task;
+
+  const ProfileScreen({Key? key, this.user, this.task}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -20,6 +23,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  final TextEditingController _taskController = TextEditingController();
+
+  Future<void> addUser() {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference todos = users.doc(user?.uid).collection('todos');
+    // Call the user's CollectionReference to add a new user
+    return todos.add({
+      'task': _taskController // 42
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
+
     return Scaffold(
         extendBody: true,
         bottomNavigationBar: const BottomNavBarRaisedInsetFb1(),
