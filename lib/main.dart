@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _initializeFirebase(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return const ProfileScreen();
+          return const LandingScreen();
         }
         return const Center(
           child: CircularProgressIndicator(),
