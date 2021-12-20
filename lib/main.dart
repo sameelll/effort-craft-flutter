@@ -561,10 +561,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               context: context,
                                               name: _nameController.text);
 
-                                      await users.add({
-                                        'email': _emailController.text,
-                                        'name': _nameController.text,
-                                      });
                                       if (user != null) {
                                         setState(() {
                                           isLoading = true;
@@ -591,19 +587,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                       TextStyle(fontSize: 18),
                                                   textAlign: TextAlign.center,
                                                 )));
-
+                                        await users.add({
+                                          'email': _emailController.text,
+                                          'name': _nameController.text,
+                                        });
                                         Get.to(() => const LoginScreen());
                                       } else if (_passwordController
                                               .text.length <
                                           6) {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-                                        await Future.delayed(
-                                            const Duration(seconds: 1));
-                                        setState(() {
-                                          isLoading = false;
-                                        });
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
                                                 duration: Duration(seconds: 4),
@@ -623,14 +614,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                   textAlign: TextAlign.center,
                                                 )));
                                       } else {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-                                        await Future.delayed(
-                                            const Duration(seconds: 1));
-                                        setState(() {
-                                          isLoading = false;
-                                        });
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
                                                 duration: Duration(seconds: 4),
