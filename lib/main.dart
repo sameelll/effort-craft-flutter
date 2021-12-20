@@ -439,8 +439,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     TextEditingController _passwordController = TextEditingController();
     TextEditingController _nameController = TextEditingController();
 
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
-
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -552,87 +550,93 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 backgroundColor: Colors.yellow[400],
                                 child: IconButton(
                                     color: Colors.black,
-                                    onPressed: () async {
-                                      User? user =
-                                          await signUpUsingEmailPassword(
+                                    onPressed: () {
+                                      signUpUsingEmailPassword(
                                               email: _emailController.text,
                                               password:
                                                   _passwordController.text,
                                               context: context,
-                                              name: _nameController.text);
-
-                                      if (user != null) {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-                                        await Future.delayed(
-                                            const Duration(seconds: 3));
-                                        setState(() {
-                                          isLoading = false;
-                                        });
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                duration: Duration(seconds: 4),
-                                                elevation: 0,
-                                                behavior:
-                                                    SnackBarBehavior.floating,
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 16,
-                                                    horizontal: 12),
-                                                shape: StadiumBorder(),
-                                                backgroundColor: Colors.green,
-                                                content: Text(
-                                                  "Registration Successful! Please login!",
-                                                  style:
-                                                      TextStyle(fontSize: 18),
-                                                  textAlign: TextAlign.center,
-                                                )));
-                                        await users.add({
-                                          'email': _emailController.text,
-                                          'name': _nameController.text,
-                                        });
-                                        Get.to(() => const LoginScreen());
-                                      } else if (_passwordController
-                                              .text.length <
-                                          6) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                duration: Duration(seconds: 4),
-                                                elevation: 0,
-                                                behavior:
-                                                    SnackBarBehavior.floating,
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 16,
-                                                    horizontal: 12),
-                                                shape: StadiumBorder(),
-                                                backgroundColor:
-                                                    Colors.redAccent,
-                                                content: Text(
-                                                  "Your password needs to be at least 6 characters long!",
-                                                  style:
-                                                      TextStyle(fontSize: 18),
-                                                  textAlign: TextAlign.center,
-                                                )));
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                duration: Duration(seconds: 4),
-                                                elevation: 0,
-                                                behavior:
-                                                    SnackBarBehavior.floating,
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 16,
-                                                    horizontal: 12),
-                                                shape: StadiumBorder(),
-                                                backgroundColor:
-                                                    Colors.redAccent,
-                                                content: Text(
-                                                  "This email is already in use. Please use another one.",
-                                                  style:
-                                                      TextStyle(fontSize: 18),
-                                                  textAlign: TextAlign.center,
-                                                )));
-                                      }
+                                              name: _nameController.text)
+                                          .then((value) {
+                                        if (value != null) {
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(value.uid)
+                                              .set({
+                                            "email": value.email,
+                                            "name": _nameController.text
+                                          });
+                                          setState(() {
+                                            isLoading = true;
+                                          });
+                                          Future.delayed(
+                                              const Duration(seconds: 3));
+                                          setState(() {
+                                            isLoading = false;
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 4),
+                                                  elevation: 0,
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 12),
+                                                  shape: StadiumBorder(),
+                                                  backgroundColor: Colors.green,
+                                                  content: Text(
+                                                    "Registration Successful! Please login!",
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                    textAlign: TextAlign.center,
+                                                  )));
+                                          Get.to(() => const LoginScreen());
+                                        } else if (_passwordController
+                                                .text.length <
+                                            6) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 4),
+                                                  elevation: 0,
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 12),
+                                                  shape: StadiumBorder(),
+                                                  backgroundColor:
+                                                      Colors.redAccent,
+                                                  content: Text(
+                                                    "Your password needs to be at least 6 characters long!",
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                    textAlign: TextAlign.center,
+                                                  )));
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  duration:
+                                                      Duration(seconds: 4),
+                                                  elevation: 0,
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 16,
+                                                      horizontal: 12),
+                                                  shape: StadiumBorder(),
+                                                  backgroundColor:
+                                                      Colors.redAccent,
+                                                  content: Text(
+                                                    "This email is already in use. Please use another one.",
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                    textAlign: TextAlign.center,
+                                                  )));
+                                        }
+                                      });
                                     },
                                     icon: isLoading
                                         ? const CircularProgressIndicator(
