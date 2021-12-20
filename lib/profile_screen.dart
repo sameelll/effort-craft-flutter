@@ -26,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> addTask(task) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     CollectionReference todos = users.doc(user?.uid).collection('todos');
+
     // Call the user's CollectionReference to add a new user
     return todos.add({"task": task});
   }
@@ -39,59 +40,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference todos = users.doc(user?.uid).collection('todos');
+    final Stream<QuerySnapshot> todosStream = todos.snapshots();
 
     return Scaffold(
-        extendBody: true,
         bottomNavigationBar: const BottomNavBarRaisedInsetFb1(),
         backgroundColor: const Color(0xFF393E46),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
-            child: Column(
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      addTask(_taskController.text);
-                    },
-                    child: const Text("dana")),
-                TextField(
-                    controller: _taskController,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
-                        hintText: "Enter the task",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                                color: Colors.green, width: 2.8)))),
-                FutureBuilder<DocumentSnapshot>(
-                  future: users.doc(user?.uid).get(),
+          Column(
+            children: [
+              // Row(
+              //   children: [
+              //     const Text(
+              //       'Achivements',
+              //       style: TextStyle(
+              //           fontSize: 30,
+              //           color: Color(0xFF1EAE98),
+              //           fontWeight: FontWeight.w700),
+              //     ),
+              //     // Adding flex
+              //     Expanded(
+              //       child: Container(),
+              //     ),
+              //     const Icon(Icons.info_outline_rounded,
+              //         size: 22, color: Color(0xFF1EAE98)),
+              //   ],
+              // ),
+              // ElevatedButton(
+              //     onPressed: () {
+              //       addTask(_taskController.text);
+              //     },
+              //     child: const Text("dana")),
+              // TextField(
+              //     controller: _taskController,
+              //     style: const TextStyle(color: Colors.black),
+              //     decoration: InputDecoration(
+              //         fillColor: Colors.grey.shade300,
+              //         filled: true,
+              //         hintText: "Enter the task",
+              //         border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(10)),
+              //         focusedBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(10),
+              //             borderSide: const BorderSide(
+              //                 color: Colors.green, width: 2.8)))),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                height: 150,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: todosStream,
                   builder: (BuildContext context,
-                      AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
-                      return const Text("Something went wrong");
+                      return const Text('Something went wrong.');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text('Loading...');
                     }
 
-                    if (snapshot.hasData && !snapshot.data!.exists) {
-                      return const Text("Document does not exist");
-                    }
+                    final data = snapshot.requireData;
 
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      Map<String, dynamic> data =
-                          snapshot.data!.data() as Map<String, dynamic>;
-                      return Text(
-                          "Full Name: ${data['name']}, Email: ${data['email']}");
-                    }
-
-                    return const Text("loading");
+                    return ListView.builder(
+                        itemCount: data.size,
+                        itemBuilder: (context, index) {
+                          return Text(
+                              "Task ${[index]} : ${data.docs[index]['task']}");
+                        });
                   },
                 ),
-              ],
-            ),
+              )
+            ],
           )
         ]));
   }
