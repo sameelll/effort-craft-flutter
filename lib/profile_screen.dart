@@ -6,9 +6,7 @@ import 'package:get/get.dart';
 class ProfileScreen extends StatefulWidget {
   final User? user;
 
-  final String? task;
-
-  const ProfileScreen({Key? key, this.user, this.task}) : super(key: key);
+  const ProfileScreen({Key? key, this.user}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -25,13 +23,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final TextEditingController _taskController = TextEditingController();
 
-  Future<void> addUser() {
+  Future<void> addTask(task) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     CollectionReference todos = users.doc(user?.uid).collection('todos');
     // Call the user's CollectionReference to add a new user
-    return todos.add({
-      'task': _taskController // 42
-    });
+    return todos.add({"task": task});
   }
 
   @override
@@ -48,35 +44,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
         extendBody: true,
         bottomNavigationBar: const BottomNavBarRaisedInsetFb1(),
         backgroundColor: const Color(0xFF393E46),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 70),
-          child: Container(
-            height: 115,
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: FutureBuilder<DocumentSnapshot>(
-              future: users.doc(user?.uid).get(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<DocumentSnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return const Text("Something went wrong");
-                }
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.35),
+            child: Column(
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      addTask(_taskController.text);
+                    },
+                    child: const Text("dana")),
+                TextField(
+                    controller: _taskController,
+                    style: const TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                        fillColor: Colors.grey.shade300,
+                        filled: true,
+                        hintText: "Enter the task",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: Colors.green, width: 2.8)))),
+                FutureBuilder<DocumentSnapshot>(
+                  future: users.doc(user?.uid).get(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return const Text("Something went wrong");
+                    }
 
-                if (snapshot.hasData && !snapshot.data!.exists) {
-                  return const Text("Document does not exist");
-                }
+                    if (snapshot.hasData && !snapshot.data!.exists) {
+                      return const Text("Document does not exist");
+                    }
 
-                if (snapshot.connectionState == ConnectionState.done) {
-                  Map<String, dynamic> data =
-                      snapshot.data!.data() as Map<String, dynamic>;
-                  return Text(
-                      "Full Name: ${data['name']}, Email: ${data['email']}");
-                }
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      Map<String, dynamic> data =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      return Text(
+                          "Full Name: ${data['name']}, Email: ${data['email']}");
+                    }
 
-                return const Text("loading");
-              },
+                    return const Text("loading");
+                  },
+                ),
+              ],
             ),
-          ),
-        ));
+          )
+        ]));
   }
 }
 
