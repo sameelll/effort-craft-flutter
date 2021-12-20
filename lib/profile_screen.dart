@@ -45,73 +45,75 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
         bottomNavigationBar: const BottomNavBarRaisedInsetFb1(),
-        backgroundColor: const Color(0xFF393E46),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Column(
-            children: [
-              // Row(
-              //   children: [
-              //     const Text(
-              //       'Achivements',
-              //       style: TextStyle(
-              //           fontSize: 30,
-              //           color: Color(0xFF1EAE98),
-              //           fontWeight: FontWeight.w700),
-              //     ),
-              //     // Adding flex
-              //     Expanded(
-              //       child: Container(),
-              //     ),
-              //     const Icon(Icons.info_outline_rounded,
-              //         size: 22, color: Color(0xFF1EAE98)),
-              //   ],
-              // ),
-              // ElevatedButton(
-              //     onPressed: () {
-              //       addTask(_taskController.text);
-              //     },
-              //     child: const Text("dana")),
-              // TextField(
-              //     controller: _taskController,
-              //     style: const TextStyle(color: Colors.black),
-              //     decoration: InputDecoration(
-              //         fillColor: Colors.grey.shade300,
-              //         filled: true,
-              //         hintText: "Enter the task",
-              //         border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(10)),
-              //         focusedBorder: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(10),
-              //             borderSide: const BorderSide(
-              //                 color: Colors.green, width: 2.8)))),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                height: 150,
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: todosStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return const Text('Something went wrong.');
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Text('Loading...');
-                    }
+        body: Container(
+            padding: const EdgeInsets.all(16.0),
+            height: MediaQuery.of(context).size.height,
+            color: const Color(0xFF393E46),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: todosStream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('Something went wrong.');
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Text('Loading...');
+                }
 
-                    final data = snapshot.requireData;
+                final data = snapshot.requireData;
 
-                    return ListView.builder(
-                        itemCount: data.size,
-                        itemBuilder: (context, index) {
-                          return Text(
-                              "Task ${[index]} : ${data.docs[index]['task']}");
-                        });
-                  },
-                ),
-              )
-            ],
-          )
-        ]));
+                return ListView.builder(
+                    itemCount: data.size,
+                    itemBuilder: (context, index) {
+                      return InfoCard(
+                        title: '${data.docs[index]['task']}',
+                        onMoreTap: () {},
+                      );
+                    });
+              },
+            )));
+    // Column(
+    //   children: [
+    //     // Row(
+    //     //   children: [
+    //     //     const Text(
+    //     //       'Achivements',
+    //     //       style: TextStyle(
+    //     //           fontSize: 30,
+    //     //           color: Color(0xFF1EAE98),
+    //     //           fontWeight: FontWeight.w700),
+    //     //     ),
+    //     //     // Adding flex
+    //     //     Expanded(
+    //     //       child: Container(),
+    //     //     ),
+    //     //     const Icon(Icons.info_outline_rounded,
+    //     //         size: 22, color: Color(0xFF1EAE98)),
+    //     //   ],
+    //     // ),
+    //     // ElevatedButton(
+    //     //     onPressed: () {
+    //     //       addTask(_taskController.text);
+    //     //     },
+    //     //     child: const Text("dana")),
+    //     // TextField(
+    //     //     controller: _taskController,
+    //     //     style: const TextStyle(color: Colors.black),
+    //     //     decoration: InputDecoration(
+    //     //         fillColor: Colors.grey.shade300,
+    //     //         filled: true,
+    //     //         hintText: "Enter the task",
+    //     //         border: OutlineInputBorder(
+    //     //             borderRadius: BorderRadius.circular(10)),
+    //     //         focusedBorder: OutlineInputBorder(
+    //     //             borderRadius: BorderRadius.circular(10),
+    //     //             borderSide: const BorderSide(
+    //     //                 color: Colors.green, width: 2.8)))),
+    //     Container(
+    // child: ,
+    //     )
+    //   ],
+    // ));
   }
 }
 
@@ -284,6 +286,79 @@ class NavBarIcon extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  final String title;
+  final String body;
+  final Function() onMoreTap;
+
+  const InfoCard(
+      {required this.title,
+      this.body =
+          """Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudi conseqr!""",
+      required this.onMoreTap,
+      Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.all(25.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.05),
+              offset: const Offset(0, 10),
+              blurRadius: 0,
+              spreadRadius: 0,
+            )
+          ],
+          color: Colors.blueGrey.shade200),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                    color: Color(0xFF393E46),
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold),
+              ),
+              Container(
+                width: 75,
+                height: 30,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100.0),
+                    color: const Color(0xFF393E46)),
+                child: GestureDetector(
+                  onTap: onMoreTap,
+                  child: const Center(
+                      child: Text(
+                    "More",
+                    style: TextStyle(color: Color(0xFF1EAE98)),
+                  )),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            body,
+            style: TextStyle(
+                color: const Color(0xFF393E46).withOpacity(.85), fontSize: 15),
+          ),
+          const SizedBox(height: 15),
+        ],
+      ),
     );
   }
 }
