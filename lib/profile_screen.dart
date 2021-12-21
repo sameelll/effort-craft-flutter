@@ -79,22 +79,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Container(
                   alignment: Alignment.bottomLeft,
-                  padding: const EdgeInsets.only(left: 9, bottom: 2),
+                  padding: const EdgeInsets.only(left: 16, bottom: 7),
                   color: const Color(0xFF393E46),
                   width: MediaQuery.of(context).size.width,
                   height: 56,
-                  child: Text(
+                  child: const Text(
                     'Tasks',
-                    style: TextStyle(
-                        color: Colors.cyan[400]?.withOpacity(0.9),
-                        fontSize: 35),
+                    style: TextStyle(color: Color(0xFF1EAE98), fontSize: 27),
                   ),
                 )
               ],
             ),
             Container(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-              height: 300,
+              height: 320,
               color: const Color(0xFF393E46),
               child: StreamBuilder<QuerySnapshot>(
                 stream: todosStream,
@@ -134,8 +132,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.only(top: 32.475, left: 16, right: 6),
-                  height: 250.9,
+                      const EdgeInsets.only(top: 12.475, left: 16, right: 6),
+                  height: 230.9,
                   width: MediaQuery.of(context).size.width / 2,
                   color: const Color(0xFF393E46),
                   child: StreamBuilder<QuerySnapshot>(
@@ -192,9 +190,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.only(bottom: 9, left: 9, right: 10),
+                  padding:
+                      const EdgeInsets.only(bottom: 29, left: 9, right: 10),
                   color: const Color(0xFF393E46),
-                  height: 250.9,
+                  height: 230.9,
                   child: const Icon(
                     Icons.arrow_right_alt,
                     size: 45,
@@ -203,9 +202,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Container(
                   padding:
-                      const EdgeInsets.only(top: 67.475, left: 16, right: 16),
+                      const EdgeInsets.only(top: 47.475, left: 16, right: 16),
                   color: const Color(0xFF393E46),
-                  height: 250.9,
+                  height: 230.9,
                   width: 132.362,
                   child: StreamBuilder<QuerySnapshot>(
                     stream: completedStream,
@@ -551,12 +550,14 @@ class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
     const accentColor = Color(0xFF393E46);
 
     return AppBar(
-      title: const Text("Effortcraft",
-          style: TextStyle(
-            color: Color(0xff903749),
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          )),
+      title: const Center(
+        child: Text("Effortcraft",
+            style: TextStyle(
+              color: Color(0xff903749),
+              fontWeight: FontWeight.bold,
+              fontSize: 34,
+            )),
+      ),
       backgroundColor: Colors.blueGrey.shade300,
       actions: [
         IconButton(
