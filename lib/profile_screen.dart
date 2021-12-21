@@ -246,7 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 } else if (data.size == 5) {
                                   return Container(
                                       padding: const EdgeInsets.all(8.0),
-                                      color: Colors.yellow.withOpacity(0.4),
+                                      color: Colors.yellow.withOpacity(0.5),
                                       child: const Image(
                                         alignment: Alignment.center,
                                         image: AssetImage(
