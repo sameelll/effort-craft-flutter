@@ -42,6 +42,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return todos.add({"task": task});
   }
 
+  Future<void> checkTask(title, task) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    CollectionReference completed =
+        users.doc(user?.uid).collection('completed');
+
+    // Call the user's CollectionReference to add a new user
+    return completed.add({"task": task, "title": title});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -102,8 +111,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return InfoCard(
                           title: '${data.docs[index]['title']}',
                           body: '${data.docs[index]['task']}',
-                          check: () {},
-                          delete: () {},
+                          check: () {
+                            checkTask('${data.docs[index]['title']}',
+                                '${data.docs[index]['task']}');
+                          },
+                          delete: () {
+                            data.docs[index].reference.delete();
+                          },
                         );
                       });
                 },
