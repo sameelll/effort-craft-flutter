@@ -170,13 +170,13 @@ class _BottomNavBarRaisedInsetFb1State
               children: [
                 NavBarIcon(
                   text: "Home",
-                  icon: Icons.home_outlined,
+                  icon: Icons.home_filled,
                   selected: true,
                   onPressed: () {
                     Get.to(() => const ProfileScreen());
                   },
                   defaultColor: secondaryColor,
-                  selectedColor: Colors.purple,
+                  selectedColor: const Color(0xff903749),
                 ),
                 NavBarIcon(
                   text: "Search",

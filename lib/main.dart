@@ -350,13 +350,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               margin: EdgeInsets.symmetric(
-                                                  vertical: 16,
+                                                  vertical: 35,
                                                   horizontal: 110),
                                               shape: StadiumBorder(),
-                                              backgroundColor: Colors.green,
+                                              backgroundColor:
+                                                  Color(0xFF1EAE98),
                                               content: Text(
                                                 "Welcome Back!",
-                                                style: TextStyle(fontSize: 18),
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Color(0xFF393E46),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                                 textAlign: TextAlign.center,
                                               )));
                                       Get.to(() => const ProfileScreen());
