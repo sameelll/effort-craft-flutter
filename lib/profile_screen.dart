@@ -184,7 +184,7 @@ class _BottomNavBarRaisedInsetFb1State
                   selected: false,
                   onPressed: () {},
                   defaultColor: secondaryColor,
-                  selectedColor: Colors.purple,
+                  selectedColor: const Color(0xff903749),
                 ),
                 const SizedBox(width: 56),
                 NavBarIcon(
@@ -193,14 +193,14 @@ class _BottomNavBarRaisedInsetFb1State
                     selected: false,
                     onPressed: () {},
                     defaultColor: secondaryColor,
-                    selectedColor: Colors.purple),
+                    selectedColor: const Color(0xff903749)),
                 NavBarIcon(
                   text: "Calendar",
                   icon: Icons.date_range_outlined,
                   selected: false,
                   onPressed: () {},
                   defaultColor: secondaryColor,
-                  selectedColor: Colors.purple,
+                  selectedColor: const Color(0xff903749),
                 )
               ],
             ),
@@ -324,7 +324,7 @@ class InfoCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
                 title,
@@ -333,20 +333,39 @@ class InfoCard extends StatelessWidget {
                     fontSize: 26,
                     fontWeight: FontWeight.bold),
               ),
+              Expanded(
+                child: Container(),
+              ),
               Container(
-                width: 75,
-                height: 30,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
                     color: const Color(0xFF393E46)),
                 child: GestureDetector(
-                  onTap: onMoreTap,
-                  child: const Center(
-                      child: Text(
-                    "More",
-                    style: TextStyle(color: Color(0xFF1EAE98)),
-                  )),
-                ),
+                    onTap: onMoreTap,
+                    child: const Center(
+                      child: Icon(
+                        Icons.check,
+                        color: Color(0xFF1EAE98),
+                      ),
+                    )),
+              ),
+              const SizedBox(width: 4),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100.0),
+                    color: const Color(0xFF393E46)),
+                child: GestureDetector(
+                    onTap: onMoreTap,
+                    child: const Center(
+                      child: Icon(
+                        Icons.delete,
+                        color: Color(0xffE05D5D),
+                      ),
+                    )),
               ),
             ],
           ),
