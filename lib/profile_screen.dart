@@ -1,3 +1,4 @@
+import 'package:effort_craft/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,11 +15,21 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   User? user;
+
   Future<void> getUserData() async {
     var userData = FirebaseAuth.instance.currentUser;
     setState(() {
       user = userData;
     });
+  }
+
+  Future signOut() async {
+    try {
+      return await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      e.toString();
+      return null;
+    }
   }
 
   final TextEditingController _taskController = TextEditingController();
@@ -44,6 +55,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final Stream<QuerySnapshot> todosStream = todos.snapshots();
 
     return Scaffold(
+        appBar: AppBarFb2(
+          onTap: signOut,
+        ),
         bottomNavigationBar: const BottomNavBarRaisedInsetFb1(),
         body: Container(
             padding: const EdgeInsets.all(16.0),
@@ -377,6 +391,68 @@ class InfoCard extends StatelessWidget {
           ),
           const SizedBox(height: 15),
         ],
+      ),
+    );
+  }
+}
+// - - - - - - - - - - - - Instructions - - - - - - - - - - - - - -
+// Place AppBarFb1 inside the app bar property of a Scaffold
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
+  @override
+  final Size preferredSize;
+  final Function() onTap;
+
+  AppBarFb2({Key? key, required this.onTap})
+      : preferredSize = const Size.fromHeight(56.0),
+        super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const accentColor = Color(0xFF393E46);
+
+    return AppBar(
+      title: const Text("Effortcraft",
+          style: TextStyle(
+            color: Color(0xff903749),
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          )),
+      backgroundColor: Colors.blueGrey.shade300,
+      actions: [
+        IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: accentColor,
+            ),
+            onPressed: () {
+              onTap();
+              Get.to(() => const LoginScreen());
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  duration: Duration(seconds: 5),
+                  elevation: 0,
+                  behavior: SnackBarBehavior.floating,
+                  margin: EdgeInsets.symmetric(vertical: 35, horizontal: 80),
+                  shape: StadiumBorder(),
+                  backgroundColor: Color(0xFF1EAE98),
+                  content: Text(
+                    "Logout Successful!",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xFF393E46),
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  )));
+            })
+      ],
+      leading: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          color: accentColor,
+        ),
+        onPressed: () {
+          Get.back();
+        },
       ),
     );
   }
