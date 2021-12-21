@@ -66,6 +66,8 @@ flutter:
     - assets/login.jpg
     - assets/signUp.jpg
     - assets/landing_dark.jpg
+    - assets/items/diamond.png
+    - assets/items/helmet.png
 
   #   - images/a_dot_ham.jpeg
 

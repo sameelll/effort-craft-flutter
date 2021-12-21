@@ -61,7 +61,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     CollectionReference todos = users.doc(user?.uid).collection('todos');
+    CollectionReference completed =
+        users.doc(user?.uid).collection('completed');
     final Stream<QuerySnapshot> todosStream = todos.snapshots();
+    final Stream<QuerySnapshot> completedStream = completed.snapshots();
+    final ScrollController _controller = ScrollController();
 
     return Scaffold(
         appBar: AppBarFb2(
@@ -90,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-              height: 330,
+              height: 300,
               color: const Color(0xFF393E46),
               child: StreamBuilder<QuerySnapshot>(
                 stream: todosStream,
@@ -114,6 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           check: () {
                             checkTask('${data.docs[index]['title']}',
                                 '${data.docs[index]['task']}');
+                            data.docs[index].reference.delete();
                           },
                           delete: () {
                             data.docs[index].reference.delete();
@@ -123,6 +128,120 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.only(top: 32.475, left: 16, right: 6),
+                  height: 250.9,
+                  width: MediaQuery.of(context).size.width / 2,
+                  color: const Color(0xFF393E46),
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: completedStream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong.');
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Text('Loading...');
+                      }
+
+                      final data = snapshot.requireData;
+
+                      return Scrollbar(
+                        controller: _controller,
+                        isAlwaysShown: true,
+                        child: SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: GridView.builder(
+                              controller: _controller,
+                              itemCount: 9,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15,
+                                      crossAxisCount: 3),
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: const Image(
+                                      image: AssetImage(
+                                          "assets/items/diamond.png"),
+                                    ));
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(bottom: 9, left: 9, right: 10),
+                  color: const Color(0xFF393E46),
+                  height: 250.9,
+                  child: const Icon(
+                    Icons.arrow_right_alt,
+                    size: 45,
+                    color: Color(0xFF1EAE98),
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.only(top: 67.475, left: 16, right: 16),
+                  color: const Color(0xFF393E46),
+                  height: 250.9,
+                  width: 132.362,
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: completedStream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return const Text('Something went wrong.');
+                      }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Text('Loading...');
+                      }
+
+                      final data = snapshot.requireData;
+
+                      return Scrollbar(
+                        controller: _controller,
+                        isAlwaysShown: true,
+                        child: SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: GridView.builder(
+                              controller: _controller,
+                              itemCount: 1,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15,
+                                      crossAxisCount: 1),
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: const Image(
+                                      alignment: Alignment.center,
+                                      image:
+                                          AssetImage("assets/items/helmet.png"),
+                                    ));
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )
+              ],
+            )
           ],
         ));
   }
