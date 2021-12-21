@@ -166,12 +166,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisSpacing: 15,
                                       crossAxisCount: 3),
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                    color: Colors.white.withOpacity(0.1),
-                                    child: const Image(
-                                      image: AssetImage(
-                                          "assets/items/diamond.png"),
-                                    ));
+                                for (var i = 0; i < data.size; i++) {
+                                  if (i + index <= data.size + 3 &&
+                                      i + index >= 3 &&
+                                      index != 7) {
+                                    return Container(
+                                        color: Colors.white.withOpacity(0.1),
+                                        child: const Image(
+                                          image: AssetImage(
+                                              "assets/items/diamond.png"),
+                                        ));
+                                  } else {
+                                    return Container(
+                                        color: Colors.white.withOpacity(0.1),
+                                        child: Container());
+                                  }
+                                }
+                                return Container();
                               },
                             ),
                           ),
@@ -224,14 +235,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       crossAxisSpacing: 15,
                                       crossAxisCount: 1),
                               itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    color: Colors.white.withOpacity(0.1),
-                                    child: const Image(
-                                      alignment: Alignment.center,
-                                      image:
-                                          AssetImage("assets/items/helmet.png"),
-                                    ));
+                                if (data.size < 5) {
+                                  return Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      color: Colors.white.withOpacity(0.1),
+                                      child: const Image(
+                                        alignment: Alignment.center,
+                                        image: AssetImage(
+                                            "assets/items/helmet.png"),
+                                      ));
+                                } else if (data.size == 5) {
+                                  return Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      color: Colors.yellow.withOpacity(0.4),
+                                      child: const Image(
+                                        alignment: Alignment.center,
+                                        image: AssetImage(
+                                            "assets/items/helmet.png"),
+                                      ));
+                                }
+                                return Container();
                               },
                             ),
                           ),
