@@ -59,75 +59,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: signOut,
         ),
         bottomNavigationBar: const BottomNavBarRaisedInsetFb1(),
-        body: Container(
-            padding: const EdgeInsets.all(16.0),
-            height: MediaQuery.of(context).size.height,
-            color: const Color(0xFF393E46),
-            child: StreamBuilder<QuerySnapshot>(
-              stream: todosStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return const Text('Something went wrong.');
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Text('Loading...');
-                }
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  padding: const EdgeInsets.only(left: 9, bottom: 2),
+                  color: const Color(0xFF393E46),
+                  width: MediaQuery.of(context).size.width,
+                  height: 56,
+                  child: Text(
+                    'Tasks',
+                    style: TextStyle(
+                        color: Colors.cyan[400]?.withOpacity(0.9),
+                        fontSize: 35),
+                  ),
+                )
+              ],
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+              height: 330,
+              color: const Color(0xFF393E46),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: todosStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong.');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading...');
+                  }
 
-                final data = snapshot.requireData;
+                  final data = snapshot.requireData;
 
-                return ListView.builder(
-                    itemCount: data.size,
-                    itemBuilder: (context, index) {
-                      return InfoCard(
-                        title: '${data.docs[index]['task']}',
-                        onMoreTap: () {},
-                      );
-                    });
-              },
-            )));
-    // Column(
-    //   children: [
-    //     // Row(
-    //     //   children: [
-    //     //     const Text(
-    //     //       'Achivements',
-    //     //       style: TextStyle(
-    //     //           fontSize: 30,
-    //     //           color: Color(0xFF1EAE98),
-    //     //           fontWeight: FontWeight.w700),
-    //     //     ),
-    //     //     // Adding flex
-    //     //     Expanded(
-    //     //       child: Container(),
-    //     //     ),
-    //     //     const Icon(Icons.info_outline_rounded,
-    //     //         size: 22, color: Color(0xFF1EAE98)),
-    //     //   ],
-    //     // ),
-    //     // ElevatedButton(
-    //     //     onPressed: () {
-    //     //       addTask(_taskController.text);
-    //     //     },
-    //     //     child: const Text("dana")),
-    //     // TextField(
-    //     //     controller: _taskController,
-    //     //     style: const TextStyle(color: Colors.black),
-    //     //     decoration: InputDecoration(
-    //     //         fillColor: Colors.grey.shade300,
-    //     //         filled: true,
-    //     //         hintText: "Enter the task",
-    //     //         border: OutlineInputBorder(
-    //     //             borderRadius: BorderRadius.circular(10)),
-    //     //         focusedBorder: OutlineInputBorder(
-    //     //             borderRadius: BorderRadius.circular(10),
-    //     //             borderSide: const BorderSide(
-    //     //                 color: Colors.green, width: 2.8)))),
-    //     Container(
-    // child: ,
-    //     )
-    //   ],
-    // ));
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return InfoCard(
+                          title: '${data.docs[index]['title']}',
+                          body: '${data.docs[index]['task']}',
+                          check: () {},
+                          delete: () {},
+                        );
+                      });
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }
 
@@ -307,21 +290,24 @@ class NavBarIcon extends StatelessWidget {
 class InfoCard extends StatelessWidget {
   final String title;
   final String body;
-  final Function() onMoreTap;
+  final Function() check;
+  final Function() delete;
 
   const InfoCard(
       {required this.title,
-      this.body =
-          """Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudi conseqr!""",
-      required this.onMoreTap,
+      required this.body,
+      required this.check,
+      required this.delete,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 180,
+      height: 150,
       margin: const EdgeInsets.only(top: 16),
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.all(18.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25.0),
           boxShadow: [
@@ -344,7 +330,7 @@ class InfoCard extends StatelessWidget {
                 title,
                 style: const TextStyle(
                     color: Color(0xFF393E46),
-                    fontSize: 26,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
               Expanded(
@@ -357,7 +343,7 @@ class InfoCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100.0),
                     color: const Color(0xFF393E46)),
                 child: GestureDetector(
-                    onTap: onMoreTap,
+                    onTap: check,
                     child: const Center(
                       child: Icon(
                         Icons.check,
@@ -373,7 +359,7 @@ class InfoCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100.0),
                     color: const Color(0xFF393E46)),
                 child: GestureDetector(
-                    onTap: onMoreTap,
+                    onTap: delete,
                     child: const Center(
                       child: Icon(
                         Icons.delete,
@@ -387,7 +373,7 @@ class InfoCard extends StatelessWidget {
           Text(
             body,
             style: TextStyle(
-                color: const Color(0xFF393E46).withOpacity(.85), fontSize: 15),
+                color: const Color(0xFF393E46).withOpacity(.85), fontSize: 20),
           ),
           const SizedBox(height: 15),
         ],
@@ -395,9 +381,6 @@ class InfoCard extends StatelessWidget {
     );
   }
 }
-// - - - - - - - - - - - - Instructions - - - - - - - - - - - - - -
-// Place AppBarFb1 inside the app bar property of a Scaffold
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
   @override
@@ -432,7 +415,7 @@ class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
                   duration: Duration(seconds: 5),
                   elevation: 0,
                   behavior: SnackBarBehavior.floating,
-                  margin: EdgeInsets.symmetric(vertical: 35, horizontal: 80),
+                  margin: EdgeInsets.symmetric(vertical: 16, horizontal: 80),
                   shape: StadiumBorder(),
                   backgroundColor: Color(0xFF1EAE98),
                   content: Text(
