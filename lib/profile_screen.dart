@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   final User? user;
@@ -65,7 +67,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         users.doc(user?.uid).collection('completed');
     final Stream<QuerySnapshot> todosStream = todos.snapshots();
     final Stream<QuerySnapshot> completedStream = completed.snapshots();
-    final ScrollController _controller = ScrollController();
 
     return Scaffold(
         appBar: AppBarFb2(
@@ -102,7 +103,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return const Text('Something went wrong.');
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Text('Loading...');
+                    return Container(
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 16, bottom: 16),
+                      height: 320,
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color(0xFF393E46),
+                      child: LoadingAnimationWidget.halfTringleDot(
+                          color: const Color(0xFFFFD369), size: 90),
+                    );
                   }
 
                   final data = snapshot.requireData;
@@ -149,40 +158,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       final data = snapshot.requireData;
 
-                      return Scrollbar(
-                        controller: _controller,
-                        isAlwaysShown: true,
-                        child: SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: GridView.builder(
-                              controller: _controller,
-                              itemCount: 9,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      mainAxisSpacing: 15,
-                                      crossAxisSpacing: 15,
-                                      crossAxisCount: 3),
-                              itemBuilder: (BuildContext context, int index) {
-                                for (var i = 0; i < data.size; i++) {
-                                  if (i + index <= data.size + 3 &&
-                                      i + index >= 3 &&
-                                      index != 7) {
-                                    return Container(
-                                        color: Colors.white.withOpacity(0.1),
-                                        child: const Image(
-                                          image: AssetImage(
-                                              "assets/items/diamond.png"),
-                                        ));
-                                  } else {
-                                    return Container(
-                                        color: Colors.white.withOpacity(0.1),
-                                        child: Container());
-                                  }
+                      return SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: GridView.builder(
+                            itemCount: 9,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 15,
+                                    crossAxisSpacing: 15,
+                                    crossAxisCount: 3),
+                            itemBuilder: (BuildContext context, int index) {
+                              for (var i = 0; i < data.size; i++) {
+                                if (i + index <= data.size + 3 &&
+                                    i + index >= 3 &&
+                                    index != 7) {
+                                  return Container(
+                                      color: Colors.white.withOpacity(0.1),
+                                      child: const Image(
+                                        image: AssetImage(
+                                            "assets/items/diamond.png"),
+                                      ));
+                                } else {
+                                  return Container(
+                                      color: Colors.white.withOpacity(0.1),
+                                      child: Container());
                                 }
-                                return Container();
-                              },
-                            ),
+                              }
+                              return Container();
+                            },
                           ),
                         ),
                       );
@@ -219,43 +223,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       final data = snapshot.requireData;
 
-                      return Scrollbar(
-                        controller: _controller,
-                        isAlwaysShown: true,
-                        child: SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: GridView.builder(
-                              controller: _controller,
-                              itemCount: 1,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      mainAxisSpacing: 15,
-                                      crossAxisSpacing: 15,
-                                      crossAxisCount: 1),
-                              itemBuilder: (BuildContext context, int index) {
-                                if (data.size < 5) {
-                                  return Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      color: Colors.white.withOpacity(0.1),
-                                      child: const Image(
-                                        alignment: Alignment.center,
-                                        image: AssetImage(
-                                            "assets/items/helmet.png"),
-                                      ));
-                                } else if (data.size == 5) {
-                                  return Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      color: Colors.yellow.withOpacity(0.5),
-                                      child: const Image(
-                                        alignment: Alignment.center,
-                                        image: AssetImage(
-                                            "assets/items/helmet.png"),
-                                      ));
-                                }
-                                return Container();
-                              },
-                            ),
+                      return SizedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: GridView.builder(
+                            itemCount: 1,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 15,
+                                    crossAxisSpacing: 15,
+                                    crossAxisCount: 1),
+                            itemBuilder: (BuildContext context, int index) {
+                              if (data.size < 5) {
+                                return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: const Image(
+                                      alignment: Alignment.center,
+                                      image:
+                                          AssetImage("assets/items/helmet.png"),
+                                    ));
+                              } else if (data.size == 5) {
+                                return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    color: Colors.yellow.withOpacity(0.5),
+                                    child: const Image(
+                                      alignment: Alignment.center,
+                                      image:
+                                          AssetImage("assets/items/helmet.png"),
+                                    ));
+                              }
+                              return Container();
+                            },
                           ),
                         ),
                       );
@@ -550,13 +549,14 @@ class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
     const accentColor = Color(0xFF393E46);
 
     return AppBar(
-      title: const Center(
+      title: Center(
         child: Text("Effortcraft",
-            style: TextStyle(
+            style: GoogleFonts.caveat(
+                textStyle: const TextStyle(
               color: Color(0xff903749),
               fontWeight: FontWeight.bold,
               fontSize: 34,
-            )),
+            ))),
       ),
       backgroundColor: Colors.blueGrey.shade300,
       actions: [

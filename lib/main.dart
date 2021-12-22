@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -102,24 +103,25 @@ class _LandingScreenState extends State<LandingScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      child: Text(
-                        'Effortcraft',
-                        style: TextStyle(
-                            color: Colors.cyan[400],
-                            fontSize: 45,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      child: Text('Effortcraft',
+                          style: GoogleFonts.caveat(
+                            textStyle: TextStyle(
+                                color:
+                                    const Color(0xFFFFD369).withOpacity(0.85),
+                                fontSize: 63,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
                     const SizedBox(
-                      height: 7,
+                      height: 2,
                     ),
                     SizedBox(
                       child: Text(
                         'Reflect Your Effort!',
                         style: TextStyle(
-                          color: Colors.red[100],
-                          fontSize: 16,
-                        ),
+                            color: Colors.red[100],
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -129,7 +131,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 height: MediaQuery.of(context).size.height * 0.07,
               ),
               Container(
-                height: 380,
+                height: 360,
               ),
               Column(
                 children: [
@@ -149,13 +151,13 @@ class _LandingScreenState extends State<LandingScreen> {
                         },
                         height: 50,
                         color: const Color(0xFFFFD369),
-                        child: const Text(
-                          "Start",
-                          style: TextStyle(
-                              color: Color(0xFF393E46),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 23.0),
-                        ),
+                        child: Text("Start",
+                            style: GoogleFonts.caveat(
+                              textStyle: const TextStyle(
+                                  color: Color(0xFF393E46),
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 30.0),
+                            )),
                         padding: const EdgeInsets.symmetric(
                             vertical: 2, horizontal: 2),
                         shape: const RoundedRectangleBorder(
@@ -233,9 +235,9 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Container(
               padding: const EdgeInsets.only(left: 35, top: 172),
-              child: Text(
+              child: const Text(
                 'Welcome\nBack',
-                style: TextStyle(color: Colors.cyan[200], fontSize: 30),
+                style: TextStyle(color: Color(0xFFFFD369), fontSize: 30),
               ),
             ),
             SingleChildScrollView(
@@ -292,23 +294,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   Get.to(() => const SignUpScreen());
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Sign Up',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: Colors.cyan[200],
+                                      color: Color(0xFFFFD369),
                                       fontSize: 16),
                                 ),
                                 style: const ButtonStyle(),
                               ),
                               TextButton(
                                   onPressed: () {},
-                                  child: Text(
+                                  child: const Text(
                                     'Forgot Password',
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: Colors.cyan[200],
+                                      color: Color(0xFFFFD369),
                                       fontSize: 16,
                                     ),
                                   )),
@@ -325,8 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               CircleAvatar(
                                 radius: 27,
-                                backgroundColor:
-                                    Colors.green[700]?.withOpacity(0.9),
+                                backgroundColor: const Color(0xFF1EAE98),
                                 child: IconButton(
                                   color: Colors.white,
                                   onPressed: () async {
@@ -385,7 +386,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                   icon: isLoading
                                       ? const CircularProgressIndicator(
-                                          color: Colors.white,
+                                          color: Color(0xff903749),
                                         )
                                       : const Icon(
                                           Icons.arrow_forward,
@@ -468,9 +469,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             Container(
               padding: const EdgeInsets.only(left: 35, top: 30),
-              child: Text(
+              child: const Text(
                 'Create\nAccount',
-                style: TextStyle(color: Colors.cyan[200], fontSize: 33),
+                style: TextStyle(color: Color(0xFFFFD369), fontSize: 33),
               ),
             ),
             SingleChildScrollView(
@@ -543,10 +544,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                    color: Colors.cyan[200],
+                                    color: Color(0xFFFFD369),
                                     fontSize: 27,
                                     fontWeight: FontWeight.w700),
                               ),
