@@ -7,6 +7,7 @@ class AddTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController _titleController = TextEditingController();
     TextEditingController _taskController = TextEditingController();
+
     return SingleChildScrollView(
       child: Container(
         padding:
