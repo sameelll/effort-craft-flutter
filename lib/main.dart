@@ -119,7 +119,7 @@ class _LandingScreenState extends State<LandingScreen> {
                       child: Text(
                         'Reflect Your Effort!',
                         style: TextStyle(
-                            color: Colors.red[100],
+                            color: const Color(0xFF7CD1B8).withOpacity(0.9),
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
@@ -154,7 +154,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         child: Text("Start",
                             style: GoogleFonts.caveat(
                               textStyle: const TextStyle(
-                                  color: Color(0xFF393E46),
+                                  color: Color(0xFF105652),
                                   fontWeight: FontWeight.w900,
                                   fontSize: 30.0),
                             )),
@@ -237,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(left: 35, top: 172),
               child: const Text(
                 'Welcome\nBack',
-                style: TextStyle(color: Color(0xFFFFD369), fontSize: 30),
+                style: TextStyle(color: Color(0xFF1EAE98), fontSize: 30),
               ),
             ),
             SingleChildScrollView(
@@ -471,7 +471,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.only(left: 35, top: 30),
               child: const Text(
                 'Create\nAccount',
-                style: TextStyle(color: Color(0xFFFFD369), fontSize: 33),
+                style: TextStyle(color: Color(0xFF1EAE98), fontSize: 33),
               ),
             ),
             SingleChildScrollView(
@@ -553,7 +553,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               CircleAvatar(
                                 radius: 27,
-                                backgroundColor: Colors.yellow[400],
+                                backgroundColor: const Color(0xFFFFD369),
                                 child: IconButton(
                                     color: Colors.black,
                                     onPressed: () {
@@ -664,12 +664,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: () {
                                   Get.to(() => const LoginScreen());
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Sign In',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: Colors.cyan[200],
+                                      color: Color(0xFF1EAE98),
                                       fontSize: 18),
                                 ),
                                 style: const ButtonStyle(),
