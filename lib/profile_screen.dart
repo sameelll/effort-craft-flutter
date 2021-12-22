@@ -153,7 +153,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return const Text('Something went wrong.');
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Text('Loading...');
+                        return Container(
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, bottom: 16),
+                          height: 230.9,
+                          width: MediaQuery.of(context).size.width,
+                          color: const Color(0xFF393E46),
+                          child: LoadingAnimationWidget.halfTringleDot(
+                              color: const Color(0xFFFFD369), size: 90),
+                        );
                       }
 
                       final data = snapshot.requireData;
