@@ -42,6 +42,8 @@ dependencies:
   google_fonts: ^2.1.0
   # Loader
   loading_animation_widget:
+  # Bottom Navbar
+  animated_bottom_navigation_bar: ^0.3.2
 
 dev_dependencies:
   flutter_test:
