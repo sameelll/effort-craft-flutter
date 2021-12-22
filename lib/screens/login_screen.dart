@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:effort_craft/main.dart';
+import 'package:effort_craft/screens/home_screen.dart';
 import 'package:effort_craft/screens/main_screen.dart';
 import 'package:effort_craft/screens/signup_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
