@@ -45,6 +45,7 @@ class InfoCard extends StatelessWidget {
                     color: Color(0xFF393E46),
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
+                maxLines: 1,
               ),
               Expanded(
                 child: Container(),
@@ -85,8 +86,11 @@ class InfoCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             body,
+            maxLines: 5,
             style: TextStyle(
-                color: const Color(0xFF393E46).withOpacity(.85), fontSize: 20),
+              color: const Color(0xFF393E46).withOpacity(.85),
+              fontSize: 20,
+            ),
           ),
           const SizedBox(height: 15),
         ],

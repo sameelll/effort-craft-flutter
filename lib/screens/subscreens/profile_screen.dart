@@ -8,7 +8,10 @@ import '../../components/info_card.dart';
 class ProfileScreen extends StatefulWidget {
   final User? user;
 
-  const ProfileScreen({Key? key, this.user,}) : super(key: key);
+  const ProfileScreen({
+    Key? key,
+    this.user,
+  }) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -24,12 +27,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
-  Future<void> addTask(task) {
+  Future<void> addTask(title, task) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     CollectionReference todos = users.doc(user?.uid).collection('todos');
 
-    // Call the user's CollectionReference to add a new user
-    return todos.add({"task": task});
+    return todos.add({"task": task, "title": title});
   }
 
   Future<void> checkTask(title, task) {
@@ -37,7 +39,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     CollectionReference completed =
         users.doc(user?.uid).collection('completed');
 
-    // Call the user's CollectionReference to add a new user
     return completed.add({"task": task, "title": title});
   }
 
