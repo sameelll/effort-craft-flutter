@@ -138,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: 300,
                         height: 74,
                         child: Text(
-                            'Your shulker seems empty.\nPlease add some task!',
+                            'Your shulker seems empty.\nPlease add some tasks!',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.caveat(
                               textStyle: TextStyle(
@@ -215,8 +215,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 );
                               }
                             } else if (data.size > 5 && data.size <= 13) {
-                              if (index != 1 ||
-                                  (data.size == 7 && index == 2)) {
+                              if (index <= data.size - 5 && index != 1) {
                                 return Container(
                                   color: Colors.white.withOpacity(0.1),
                                   child: const Image(
