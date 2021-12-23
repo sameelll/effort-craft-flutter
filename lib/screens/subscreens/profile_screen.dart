@@ -196,25 +196,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 crossAxisCount: 3),
                         itemBuilder: (BuildContext context, int index) {
                           for (var i = 1; i <= data.size; i++) {
-                            if (i + index <= data.size + 3 &&
-                                    i + index >= 4 &&
-                                    index != 7 ||
-                                data.size + index == 13) {
-                              return Container(
+                            if (data.size <= 5) {
+                              if (i + index <= data.size + 3 &&
+                                      i + index >= 4 &&
+                                      index != 7 ||
+                                  data.size + index == 13) {
+                                return Container(
                                   color: Colors.white.withOpacity(0.1),
                                   child: const Image(
                                     image:
                                         AssetImage("assets/items/diamond.png"),
-                                  ));
-                            } else {
-                              return Container(
+                                  ),
+                                );
+                              } else {
+                                return Container(
                                   color: Colors.white.withOpacity(0.1),
-                                  child: Container());
+                                  child: Container(),
+                                );
+                              }
+                            } else if (data.size > 5 && data.size <= 13) {
+                              if (index != 1 ||
+                                  (data.size == 7 && index == 2)) {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image:
+                                        AssetImage("assets/items/diamond.png"),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: Container(),
+                                );
+                              }
                             }
                           }
                           return Container(
-                              color: Colors.white.withOpacity(0.1),
-                              child: Container());
+                            color: Colors.white.withOpacity(0.1),
+                            child: Container(),
+                          );
                         },
                       ),
                     ),
@@ -279,13 +300,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ));
                           } else if (data.size == 5) {
                             return Container(
+                              padding: const EdgeInsets.all(8.0),
+                              color: Colors.yellow.withOpacity(0.5),
+                              child: const Image(
+                                alignment: Alignment.center,
+                                image: AssetImage("assets/items/helmet.png"),
+                              ),
+                            );
+                          } else if (data.size > 5 && data.size < 13) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image:
+                                      AssetImage("assets/items/chestplate.png"),
+                                ));
+                          } else if (data.size == 13) {
+                            return Container(
                                 padding: const EdgeInsets.all(8.0),
                                 color: Colors.yellow.withOpacity(0.5),
                                 child: const Image(
                                   alignment: Alignment.center,
-                                  image: AssetImage("assets/items/helmet.png"),
+                                  image:
+                                      AssetImage("assets/items/chestplate.png"),
                                 ));
                           }
+
                           return Container();
                         },
                       ),
