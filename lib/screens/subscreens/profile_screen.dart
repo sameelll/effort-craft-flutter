@@ -28,12 +28,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
   Future<void> checkTask(title, task) {
-    CollectionReference users = FirebaseFirestore.instance.collection('users');
     CollectionReference completed =
         users.doc(user?.uid).collection('completed');
-
-    return completed.add({"task": task, "title": title});
+    return completed.add({
+      "task": task,
+      "title": title,
+    });
   }
 
   @override
