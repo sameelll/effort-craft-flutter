@@ -51,7 +51,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             textAlign: TextAlign.center,
           )));
 
-      return todos.add({"task": task, "title": title});
+      return todos.add(
+        {"task": task, "title": title},
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

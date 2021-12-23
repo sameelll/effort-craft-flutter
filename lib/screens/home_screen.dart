@@ -16,10 +16,10 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _bottomNavIndex = 0;
   Widget _currentScreen = const ProfileScreen();
+  var _iconType = Icons.add;
 
   @override
   Widget build(BuildContext context) {
-
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
@@ -31,14 +31,15 @@ class _MainScreenState extends State<MainScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xFFFFD369).withOpacity(0.85),
-          child: const Icon(
-            Icons.add,
+          child: Icon(
+            _iconType,
             size: 34,
-            color: Color(0xFF393E46),
+            color: const Color(0xFF393E46),
           ),
           onPressed: () {
             setState(() {
               _currentScreen = const AddTaskScreen();
+              _iconType = Icons.view_in_ar;
             });
           },
         ),
@@ -62,6 +63,7 @@ class _MainScreenState extends State<MainScreen> {
             _bottomNavIndex = index;
             _currentScreen =
                 (index == 0) ? const ProfileScreen() : const AddTaskScreen();
+            _iconType = Icons.add;
           }),
           //other params
         ),
