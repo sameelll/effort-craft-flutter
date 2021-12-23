@@ -61,10 +61,12 @@ class _LandingScreenState extends State<LandingScreen> {
                     SizedBox(
                       child: Text(
                         'Reflect Your Effort!',
-                        style: TextStyle(
-                            color: const Color(0xFF7CD1B8).withOpacity(0.9),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
+                        style: GoogleFonts.caveat(
+                          textStyle: TextStyle(
+                              color: const Color(0xFF7CD1B8).withOpacity(0.9),
+                              fontSize: 21,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ],
@@ -74,7 +76,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 height: MediaQuery.of(context).size.height * 0.07,
               ),
               Container(
-                height: 360,
+                height: 350,
               ),
               Column(
                 children: [

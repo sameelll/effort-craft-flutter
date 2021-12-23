@@ -5,6 +5,7 @@ import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -48,10 +49,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         body: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 35, top: 30),
-              child: const Text(
+              padding: const EdgeInsets.only(left: 35, top: 34),
+              child: Text(
                 'Create\nAccount',
-                style: TextStyle(color: Color(0xFF1EAE98), fontSize: 33),
+                style: GoogleFonts.caveat(
+                  textStyle: const TextStyle(
+                      color: Color(0xFF1EAE98),
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             SingleChildScrollView(
@@ -124,12 +130,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 'Sign Up',
-                                style: TextStyle(
-                                    color: Color(0xFFFFD369),
-                                    fontSize: 27,
-                                    fontWeight: FontWeight.w700),
+                                style: GoogleFonts.caveat(
+                                  textStyle: const TextStyle(
+                                      color: Color(0xFFFFD369),
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                               CircleAvatar(
                                 radius: 27,
@@ -243,13 +251,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: () {
                                   Get.to(() => const LoginScreen());
                                 },
-                                child: const Text(
+                                child: Text(
                                   'Sign In',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xFF1EAE98),
-                                      fontSize: 18),
+                                  style: GoogleFonts.caveat(
+                                    textStyle: const TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Color(0xFF1EAE98),
+                                        fontSize: 24),
+                                  ),
                                 ),
                                 style: const ButtonStyle(),
                               ),

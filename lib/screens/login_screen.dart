@@ -5,6 +5,7 @@ import 'package:effort_craft/screens/home_screen.dart';
 import 'package:effort_craft/screens/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,10 +49,15 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 35, top: 172),
-              child: const Text(
+              padding: const EdgeInsets.only(left: 35, top: 161),
+              child: Text(
                 'Welcome\nBack',
-                style: TextStyle(color: Color(0xFF1EAE98), fontSize: 30),
+                style: GoogleFonts.caveat(
+                  textStyle: const TextStyle(
+                      color: Color(0xFF1EAE98),
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             SingleChildScrollView(
@@ -108,36 +114,47 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   Get.to(() => const SignUpScreen());
                                 },
-                                child: const Text(
+                                child: Text(
                                   'Sign Up',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xFFFFD369),
-                                      fontSize: 16),
+                                  style: GoogleFonts.caveat(
+                                    textStyle: const TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Color(0xFFFFD369),
+                                        fontSize: 20),
+                                  ),
                                 ),
                                 style: const ButtonStyle(),
                               ),
                               TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Forgot Password',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Color(0xFFFFD369),
-                                      fontSize: 16,
-                                    ),
-                                  )),
+                                onPressed: () {},
+                                child: Text(
+                                  'Forgat Password?',
+                                  textAlign: TextAlign.left,
+                                  style: GoogleFonts.caveat(
+                                    textStyle: const TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Color(0xFFFFD369),
+                                        fontSize: 20),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(
                             height: 5,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const SizedBox(
-                                width: 268,
+                              Text(
+                                'Sign In',
+                                style: GoogleFonts.caveat(
+                                  textStyle: const TextStyle(
+                                      color: Color(0xFF1EAE98),
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                               CircleAvatar(
                                 radius: 27,

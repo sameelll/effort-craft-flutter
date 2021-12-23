@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:effort_craft/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddTaskScreen extends StatefulWidget {
   final UserAttributes? user;
@@ -100,10 +101,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         color: const Color(0xFF393E46),
                         width: MediaQuery.of(context).size.width * 0.7,
                         height: 56,
-                        child: const Text(
+                        child: Text(
                           'Add a task',
-                          style:
-                              TextStyle(color: Color(0xFF1EAE98), fontSize: 27),
+                          style: GoogleFonts.caveat(
+                            textStyle: const TextStyle(
+                                color: Color(0xFF1EAE98), fontSize: 34),
+                          ),
                         ),
                       )
                     ],

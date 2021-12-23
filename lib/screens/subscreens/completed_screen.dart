@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CompletedScreen extends StatefulWidget {
@@ -55,13 +56,16 @@ class _CompletedScreenState extends State<CompletedScreen> {
           children: [
             Container(
               alignment: Alignment.bottomLeft,
-              padding: const EdgeInsets.only(left: 16, bottom: 7),
+              padding: const EdgeInsets.only(left: 16),
               color: const Color(0xFF393E46),
               width: MediaQuery.of(context).size.width,
               height: 56,
-              child: const Text(
+              child: Text(
                 'Your Effort',
-                style: TextStyle(color: Color(0xFF1EAE98), fontSize: 27),
+                style: GoogleFonts.caveat(
+                  textStyle:
+                      const TextStyle(color: Color(0xFF1EAE98), fontSize: 34),
+                ),
               ),
             )
           ],
