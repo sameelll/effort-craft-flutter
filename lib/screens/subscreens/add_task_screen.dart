@@ -98,7 +98,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        padding: const EdgeInsets.only(bottom: 7),
+                        padding: const EdgeInsets.only(bottom: 22),
                         color: const Color(0xFF393E46),
                         width: MediaQuery.of(context).size.width * 0.7,
                         height: 56,

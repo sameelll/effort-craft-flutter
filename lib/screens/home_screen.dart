@@ -1,6 +1,7 @@
 import 'package:effort_craft/auth_service.dart';
 import 'package:effort_craft/screens/subscreens/add_task_screen.dart';
 import 'package:effort_craft/components/app_bar.dart';
+import 'package:effort_craft/screens/subscreens/completed_screen.dart';
 import 'package:effort_craft/screens/subscreens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -47,8 +48,8 @@ class _MainScreenState extends State<MainScreen> {
         bottomNavigationBar: AnimatedBottomNavigationBar(
           icons: const [
             Icons.home_filled,
-            Icons.search,
             Icons.check,
+            Icons.search,
             Icons.emoji_events
           ],
           activeColor: const Color(0xff903749),
@@ -61,8 +62,11 @@ class _MainScreenState extends State<MainScreen> {
           activeIndex: _bottomNavIndex,
           onTap: (index) => setState(() {
             _bottomNavIndex = index;
-            _currentScreen =
-                (index == 0) ? const ProfileScreen() : const AddTaskScreen();
+            _currentScreen = (index == 0)
+                ? const ProfileScreen()
+                : (index == 1)
+                    ? const CompletedScreen()
+                    : const AddTaskScreen();
             _iconType = Icons.add;
           }),
           //other params
