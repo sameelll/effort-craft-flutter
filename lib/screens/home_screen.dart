@@ -1,39 +1,70 @@
+import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/screens/subscreens/add_task_screen.dart';
+import 'package:effort_craft/components/app_bar.dart';
+import 'package:effort_craft/screens/subscreens/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:effort_craft/screens/landing_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  // Initialize forestore
-  final Stream<QuerySnapshot> users =
-      FirebaseFirestore.instance.collection('users').snapshots();
-  // Initialize firebase app
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-    return firebaseApp;
-  }
+class _MainScreenState extends State<MainScreen> {
+  int _bottomNavIndex = 0;
+  Widget _currentScreen = const ProfileScreen();
 
   @override
   Widget build(BuildContext context) {
+
+    final authService = Provider.of<AuthService>(context);
+
     return Scaffold(
-        body: FutureBuilder(
-      future: _initializeFirebase(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return const LandingScreen();
-        }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    ));
+        backgroundColor: const Color(0xFF393E46),
+        appBar: AppBarFb2(
+          onTap: () async {
+            await authService.signOut();
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xFFFFD369).withOpacity(0.85),
+          child: const Icon(
+            Icons.add,
+            size: 34,
+            color: Color(0xFF393E46),
+          ),
+          onPressed: () {
+            setState(() {
+              _currentScreen = const AddTaskScreen();
+            });
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: AnimatedBottomNavigationBar(
+          icons: const [
+            Icons.home_filled,
+            Icons.search,
+            Icons.check,
+            Icons.emoji_events
+          ],
+          activeColor: const Color(0xff903749),
+          inactiveColor: Colors.black54,
+          gapLocation: GapLocation.center,
+          notchSmoothness: NotchSmoothness.verySmoothEdge,
+          backgroundColor: Colors.blueGrey.shade300,
+          leftCornerRadius: 32,
+          rightCornerRadius: 32,
+          activeIndex: _bottomNavIndex,
+          onTap: (index) => setState(() {
+            _bottomNavIndex = index;
+            _currentScreen =
+                (index == 0) ? const ProfileScreen() : const AddTaskScreen();
+          }),
+          //other params
+        ),
+        body: _currentScreen);
   }
 }

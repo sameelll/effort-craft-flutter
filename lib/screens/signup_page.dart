@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:effort_craft/screens/home_screen.dart';
+import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/login_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -14,23 +15,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  static Future<User?> signUpUsingEmailPassword(
-      {required String email,
-      required String name,
-      required String password,
-      required BuildContext context}) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-    try {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {}
-    }
-    return user;
-  }
-
   bool isLoading = false;
 
   @override
@@ -38,6 +22,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
     TextEditingController _nameController = TextEditingController();
+
+    final authService = Provider.of<AuthService>(context);
 
     return Container(
       decoration: const BoxDecoration(
@@ -55,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              Get.to(() => const HomeScreen());
+              Get.to(() => const LandingScreen());
             },
           ),
         ),
@@ -150,13 +136,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 backgroundColor: const Color(0xFFFFD369),
                                 child: IconButton(
                                     color: Colors.black,
-                                    onPressed: () {
-                                      signUpUsingEmailPassword(
-                                              email: _emailController.text,
-                                              password:
-                                                  _passwordController.text,
-                                              context: context,
-                                              name: _nameController.text)
+                                    onPressed: () async {
+                                      await authService
+                                          .createUserWithEmailAndPassword(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                      )
                                           .then((value) {
                                         if (value != null) {
                                           FirebaseFirestore.instance

@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/home_screen.dart';
-import 'package:effort_craft/screens/main_screen.dart';
 import 'package:effort_craft/screens/signup_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,23 +15,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Login Function
-  static Future<User?> loginUsingEmailPassword(
-      {required String email,
-      required String password,
-      required BuildContext context}) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-    try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == "user-not-found") {}
-    }
-    return user;
-  }
-
   bool isLoading = false;
 
   @override
@@ -38,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
     // Creating the textfield controller
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
+
+    final authService = Provider.of<AuthService>(context);
 
     return Container(
       decoration: const BoxDecoration(
@@ -55,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.white,
             ),
             onPressed: () {
-              Get.to(() => const HomeScreen());
+              Get.to(() => const LandingScreen());
             },
           ),
         ),
@@ -159,11 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: IconButton(
                                   color: Colors.white,
                                   onPressed: () async {
-                                    User? user = await loginUsingEmailPassword(
-                                        email: _emailController.text,
-                                        password: _passwordController.text,
-                                        context: context);
-                                    if (user != null) {
+                                    authService.signInWithEmailAndPassword(
+                                      _emailController.text,
+                                      _passwordController.text,
+                                    );
+                                    if (authService.user != null) {
                                       setState(() {
                                         isLoading = true;
                                       });
