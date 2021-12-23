@@ -95,7 +95,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               final data = snapshot.requireData;
 
-              return ListView.builder(
+              if (data.size > 0) {
+                return ListView.builder(
                   itemCount: data.size,
                   itemBuilder: (context, index) {
                     return InfoCard(
@@ -110,7 +111,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         data.docs[index].reference.delete();
                       },
                     );
-                  });
+                  },
+                );
+              }
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: Image(
+                      image: AssetImage("assets/creeper.png"),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        color: const Color(0xFF393E46),
+                        width: 300,
+                        height: 74,
+                        child: Text(
+                            'Your shulker seems empty.\nPlease add some task!',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.caveat(
+                              textStyle: TextStyle(
+                                color: const Color(0xFFFFD369).withOpacity(0.9),
+                                fontSize: 30,
+                              ),
+                            )),
+                      )
+                    ],
+                  ),
+                ],
+              );
             },
           ),
         ),
@@ -155,10 +195,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 crossAxisSpacing: 15,
                                 crossAxisCount: 3),
                         itemBuilder: (BuildContext context, int index) {
-                          for (var i = 0; i < data.size; i++) {
+                          for (var i = 1; i <= data.size; i++) {
                             if (i + index <= data.size + 3 &&
-                                i + index >= 3 &&
-                                index != 7) {
+                                    i + index >= 4 &&
+                                    index != 7 ||
+                                data.size + index == 13) {
                               return Container(
                                   color: Colors.white.withOpacity(0.1),
                                   child: const Image(
