@@ -171,7 +171,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Container());
                             }
                           }
-                          return Container();
+                          return Container(
+                              color: Colors.white.withOpacity(0.1),
+                              child: Container());
                         },
                       ),
                     ),
