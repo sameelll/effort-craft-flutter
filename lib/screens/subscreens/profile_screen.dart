@@ -197,10 +197,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           for (var i = 1; i <= data.size; i++) {
                             if (data.size <= 5) {
-                              if (i + index <= data.size + 3 &&
-                                      i + index >= 4 &&
-                                      index != 7 ||
-                                  data.size + index == 13) {
+                              if (index < data.size + 3 &&
+                                      index != 7 &&
+                                      i + index >= 4 ||
+                                  (data.size == 5 && index == 8)) {
                                 return Container(
                                   color: Colors.white.withOpacity(0.1),
                                   child: const Image(
