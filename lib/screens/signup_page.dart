@@ -157,7 +157,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               .doc(value.uid)
                                               .set({
                                             "email": value.email,
-                                            "name": _nameController.text
+                                            "name": _nameController.text,
                                           });
                                           setState(() {
                                             isLoading = true;

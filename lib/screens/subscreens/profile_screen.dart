@@ -33,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> checkTask(title, task) {
     CollectionReference completed =
         users.doc(user?.uid).collection('completed');
+
     return completed.add({
       "task": task,
       "title": title,
