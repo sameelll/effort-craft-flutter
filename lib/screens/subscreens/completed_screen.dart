@@ -92,16 +92,17 @@ class _CompletedScreenState extends State<CompletedScreen> {
               final data = snapshot.requireData;
 
               return ListView.builder(
-                  itemCount: data.size,
-                  itemBuilder: (context, index) {
-                    return CompletedCard(
-                      title: '${data.docs[index]['title']}',
-                      body: '${data.docs[index]['task']}',
-                      delete: () {
-                        data.docs[index].reference.delete();
-                      },
-                    );
-                  });
+                itemCount: data.size,
+                itemBuilder: (context, index) {
+                  return CompletedCard(
+                    title: '${data.docs[index]['title']}',
+                    body: '${data.docs[index]['task']}',
+                    delete: () {
+                      data.docs[index].reference.delete();
+                    },
+                  );
+                },
+              );
             },
           ),
         ),

@@ -13,8 +13,6 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  bool isLoading = false;
-
   User? user;
 
   Future<void> getUserData() async {
@@ -160,13 +158,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             addTask(
                                 _titleController.text, _taskController.text);
                           },
-                          icon: isLoading
-                              ? const CircularProgressIndicator(
-                                  color: Color(0xff903749),
-                                )
-                              : const Icon(
-                                  Icons.add,
-                                ),
+                          icon: const Icon(
+                            Icons.add,
+                          ),
                         ),
                       )
                     ],
