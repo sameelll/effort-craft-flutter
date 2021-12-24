@@ -78,6 +78,9 @@ flutter:
     - assets/items/diamond.png
     - assets/items/helmet.png
     - assets/items/chestplate.png
+    - assets/items/leggings.png
+    - assets/items/boots.png
+    - assets/items/sword.png
 
   #   - images/a_dot_ham.jpeg
 

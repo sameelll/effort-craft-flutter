@@ -34,6 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     CollectionReference completed =
         users.doc(user?.uid).collection('completed');
 
+    CollectionReference totalTasks =
+        users.doc(user?.uid).collection('totalTasks');
+
+    totalTasks.add({"total": title});
+
     return completed.add({
       "task": task,
       "title": title,
