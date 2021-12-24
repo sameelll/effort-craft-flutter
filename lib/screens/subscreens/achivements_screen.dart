@@ -52,7 +52,7 @@ class _AchivementsScreenState extends State<AchivementsScreen> {
               width: MediaQuery.of(context).size.width,
               height: 56,
               child: Text(
-                'Your Effort',
+                'Achivements',
                 style: GoogleFonts.caveat(
                   textStyle:
                       const TextStyle(color: Color(0xFF1EAE98), fontSize: 34),
@@ -103,13 +103,6 @@ class CustomCarouselFB2 extends StatefulWidget {
 }
 
 class _CustomCarouselFB2State extends State<CustomCarouselFB2> {
-  // - - - - - - - - - - - - Instructions - - - - - - - - - - - - - -
-  // 1.Replace cards list with whatever widgets you'd like.
-  // 2.Change the widgetMargin attribute, to ensure good spacing on all screensize.
-  // 3.If you have a problem with this widget, please contact us at flutterbricks90@gmail.com
-  // Learn to build this widget at https://www.youtube.com/watch?v=dSMw1Nb0QVg!
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   List<Widget> cards = [
     CardFb1(
         text: "Diamond Helmet",
