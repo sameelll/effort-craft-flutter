@@ -21,10 +21,23 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   User? user;
 
+  late String name;
+
   Future<void> getUserData() async {
     var userData = FirebaseAuth.instance.currentUser;
+
     setState(() {
       user = userData;
+    });
+  }
+
+  getUserInfo() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .get()
+        .then((ds) {
+      name = ds.get("name");
     });
   }
 
@@ -37,6 +50,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
+
     CollectionReference totalTasks =
         users.doc(user?.uid).collection('totalTasks');
 
@@ -47,7 +61,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     final Stream<QuerySnapshot> todosStream = todos.snapshots();
     final Stream<QuerySnapshot> completedStream = completed.snapshots();
     final Stream<QuerySnapshot> totalTasksStream = totalTasks.snapshots();
-    final Stream<QuerySnapshot> userInfoStream = users.snapshots();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,10 +75,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               height: Get.height * 4.3 / 12,
               width: Get.width,
               color: const Color(0xFF393E46),
-              child: StreamBuilder<QuerySnapshot>(
-                stream: userInfoStream,
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
+              child: FutureBuilder(
+                future: getUserInfo(),
+                builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const Text('Something went wrong.');
                   }
@@ -81,12 +93,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     );
                   }
 
-                  final data = snapshot.requireData;
-
                   return Center(
                       child: CardFb11(
                     image: "assets/steve.png",
-                    text: data.docs[1]["name"],
+                    text: name,
                     onPressed: () {},
                   ));
                 },
