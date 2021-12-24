@@ -50,8 +50,8 @@ class _MainScreenState extends State<MainScreen> {
           icons: const [
             Icons.home_filled,
             Icons.check,
-            Icons.search,
-            Icons.emoji_events
+            Icons.emoji_events,
+            Icons.person
           ],
           activeColor: const Color(0xff903749),
           inactiveColor: Colors.black54,

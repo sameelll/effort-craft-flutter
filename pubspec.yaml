@@ -46,6 +46,8 @@ dependencies:
   loading_animation_widget:
   # Bottom Navbar
   animated_bottom_navigation_bar: ^0.3.2
+  # Percent Indicator
+  percent_indicator: ^3.4.0
 
 dev_dependencies:
   flutter_test:
