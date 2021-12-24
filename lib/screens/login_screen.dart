@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       });
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
-                                              duration: Duration(seconds: 5),
+                                              duration: Duration(seconds: 4),
                                               elevation: 5,
                                               behavior:
                                                   SnackBarBehavior.floating,

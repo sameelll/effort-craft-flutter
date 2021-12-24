@@ -18,7 +18,7 @@ class CardFb11 extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: Get.width * 0.8,
+        width: Get.width * 0.48,
         height: Get.height * 0.8,
         padding: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
@@ -33,8 +33,9 @@ class CardFb11 extends StatelessWidget {
           ],
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(image: AssetImage(image), height: 170, fit: BoxFit.cover),
+            Image(image: AssetImage(image), height: 130, fit: BoxFit.cover),
             const SizedBox(
               height: 25,
             ),

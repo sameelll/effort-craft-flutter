@@ -3,8 +3,8 @@ import 'package:effort_craft/screens/subscreens/achivements_screen.dart';
 import 'package:effort_craft/screens/subscreens/add_task_screen.dart';
 import 'package:effort_craft/components/app_bar.dart';
 import 'package:effort_craft/screens/subscreens/completed_screen.dart';
+import 'package:effort_craft/screens/subscreens/home_screen.dart';
 import 'package:effort_craft/screens/subscreens/profile_screen.dart';
-import 'package:effort_craft/screens/subscreens/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _bottomNavIndex = 0;
-  Widget _currentScreen = const ProfileScreen();
+  Widget _currentScreen = const HomeScreen();
   var _iconType = Icons.add;
 
   @override
@@ -65,13 +65,13 @@ class _MainScreenState extends State<MainScreen> {
           onTap: (index) => setState(() {
             _bottomNavIndex = index;
             _currentScreen = (index == 0)
-                ? const ProfileScreen()
+                ? const HomeScreen()
                 : (index == 1)
                     ? const CompletedScreen()
                     : (index == 2)
                         ? const AchivementsScreen()
                         : (index == 3)
-                            ? const UserProfileScreen()
+                            ? const ProfileScreen()
                             : const AddTaskScreen();
             _iconType = Icons.add;
           }),
