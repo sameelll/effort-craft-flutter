@@ -79,7 +79,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 250,
                   width: 50,
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: completedStream,
+                    stream: totalTasksStream,
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
@@ -96,6 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: const Color(0xFFFFD369), size: 90),
                         );
                       }
+                      final data = snapshot.requireData;
 
                       return SizedBox(
                         child: Padding(
@@ -108,14 +109,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     crossAxisSpacing: 15,
                                     crossAxisCount: 1),
                             itemBuilder: (BuildContext context, int index) {
-                              return Container(
+                              if (data.size < 5) {
+                                return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: const Image(
+                                      alignment: Alignment.center,
+                                      image:
+                                          AssetImage("assets/items/helmet.png"),
+                                    ));
+                              } else if (data.size == 5) {
+                                return Container(
                                   padding: const EdgeInsets.all(8.0),
-                                  color: Colors.white.withOpacity(0.1),
+                                  color: Colors.yellow.withOpacity(0.5),
                                   child: const Image(
                                     alignment: Alignment.center,
                                     image:
                                         AssetImage("assets/items/helmet.png"),
-                                  ));
+                                  ),
+                                );
+                              } else if (data.size > 5 && data.size < 13) {
+                                return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: const Image(
+                                      alignment: Alignment.center,
+                                      image: AssetImage(
+                                          "assets/items/chestplate.png"),
+                                    ));
+                              } else if (data.size == 13) {
+                                return Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    color: Colors.yellow.withOpacity(0.5),
+                                    child: const Image(
+                                      alignment: Alignment.center,
+                                      image: AssetImage(
+                                          "assets/items/chestplate.png"),
+                                    ));
+                              }
+
+                              return Container();
                             },
                           ),
                         ),
@@ -171,21 +204,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         return Container(
                           padding: const EdgeInsets.only(
                               left: 16, right: 16, bottom: 16),
-                          height: 50,
+                          height: 20,
                           width: MediaQuery.of(context).size.width,
                           color: const Color(0xFF393E46),
                           child: LoadingAnimationWidget.halfTringleDot(
-                              color: const Color(0xFFFFD369), size: 90),
+                              color: const Color(0xFFFFD369), size: 20),
                         );
                       }
                       return SizedBox(
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: GridView.builder(
-                            itemCount: 1,
+                            itemCount: 2,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisSpacing: 15,
+                                    mainAxisSpacing: 137.5,
                                     crossAxisSpacing: 15,
                                     crossAxisCount: 1),
                             itemBuilder: (BuildContext context, int index) {
