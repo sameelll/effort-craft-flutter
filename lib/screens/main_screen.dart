@@ -4,6 +4,7 @@ import 'package:effort_craft/screens/subscreens/add_task_screen.dart';
 import 'package:effort_craft/components/app_bar.dart';
 import 'package:effort_craft/screens/subscreens/completed_screen.dart';
 import 'package:effort_craft/screens/subscreens/profile_screen.dart';
+import 'package:effort_craft/screens/subscreens/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,9 @@ class _MainScreenState extends State<MainScreen> {
                     ? const CompletedScreen()
                     : (index == 2)
                         ? const AchivementsScreen()
-                        : const AddTaskScreen();
+                        : (index == 3)
+                            ? const UserProfileScreen()
+                            : const AddTaskScreen();
             _iconType = Icons.add;
           }),
           //other params
