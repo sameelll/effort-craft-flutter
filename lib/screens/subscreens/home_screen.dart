@@ -295,22 +295,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                         AssetImage("assets/items/diamond.png"),
                                   ),
                                 );
+                              } else if ((data.size == 40) && index == 7) {
+                                return Container(
+                                  padding: const EdgeInsets.all(4.7),
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image: AssetImage("assets/items/stick.png"),
+                                  ),
+                                );
                               } else {
                                 return Container(
                                   color: Colors.white.withOpacity(0.1),
                                   child: Container(),
                                 );
                               }
-                            }
-                            if ((data.size == 40) &&
-                                index < data.size - 36 &&
-                                index == 7) {
-                              return Container(
-                                color: Colors.white.withOpacity(0.1),
-                                child: const Image(
-                                  image: AssetImage("assets/items/stick.png"),
-                                ),
-                              );
                             }
                           }
                           return Container(
