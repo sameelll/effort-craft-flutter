@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/auth/auth_service.dart';
 import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/login_screen.dart';
 import 'package:flutter/material.dart';

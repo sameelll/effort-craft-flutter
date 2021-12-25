@@ -276,6 +276,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Container(),
                                 );
                               }
+                            } else if (data.size > 24 && data.size <= 40) {
+                              if ((index < (data.size - 24)) &&
+                                      i + index >= 2 &&
+                                      index != 2 &&
+                                      index != 3 &&
+                                      index != 5 &&
+                                      index != 6 &&
+                                      index != 7 &&
+                                      index != 8 ||
+                                  (data.size == 25 && index == 1) ||
+                                  (data.size >= 27 && index == 4) ||
+                                  (data.size == 26 && index == 4)) {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image:
+                                        AssetImage("assets/items/diamond.png"),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: Container(),
+                                );
+                              }
+                            }
+                            if ((data.size == 40) &&
+                                index < data.size - 36 &&
+                                index == 7) {
+                              return Container(
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  image: AssetImage("assets/items/stick.png"),
+                                ),
+                              );
                             }
                           }
                           return Container(

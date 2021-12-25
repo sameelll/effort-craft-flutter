@@ -1,4 +1,4 @@
-import 'package:effort_craft/user_model.dart';
+import 'package:effort_craft/auth/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class AuthService {

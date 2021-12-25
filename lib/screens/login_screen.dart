@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/auth/auth_service.dart';
 import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/main_screen.dart';
 import 'package:effort_craft/screens/signup_page.dart';

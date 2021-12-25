@@ -1,4 +1,4 @@
-import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/auth/auth_service.dart';
 import 'package:effort_craft/screens/subscreens/achivements_screen.dart';
 import 'package:effort_craft/screens/subscreens/add_task_screen.dart';
 import 'package:effort_craft/components/app_bar.dart';

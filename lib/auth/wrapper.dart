@@ -1,7 +1,7 @@
-import 'package:effort_craft/auth_service.dart';
+import 'package:effort_craft/auth/auth_service.dart';
 import 'package:effort_craft/screens/login_screen.dart';
 import 'package:effort_craft/screens/main_screen.dart';
-import 'package:effort_craft/user_model.dart';
+import 'package:effort_craft/auth/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

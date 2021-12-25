@@ -84,6 +84,7 @@ flutter:
     - assets/items/boots.png
     - assets/items/sword.png
     - assets/items/torch.png
+    - assets/items/stick.png
     - assets/steve.png
 
   #   - images/a_dot_ham.jpeg
