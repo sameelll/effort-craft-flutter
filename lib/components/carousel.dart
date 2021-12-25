@@ -33,6 +33,11 @@ class _CustomCarouselFB2State extends State<CustomCarouselFB2> {
         text: "Diamond Sword",
         image: "assets/items/sword.png",
         subtitle: "40 Effort",
+        onPressed: () {}),
+    CardFb1(
+        text: "Torch",
+        image: "assets/items/torch.png",
+        subtitle: "50 Effort",
         onPressed: () {})
   ];
 

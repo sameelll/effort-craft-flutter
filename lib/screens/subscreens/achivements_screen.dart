@@ -148,7 +148,7 @@ class _AchivementsScreenState extends State<AchivementsScreen> {
                     animation: true,
                     percent: dataPercent,
                     center: Text(
-                      "${dataPercent * 100}%",
+                      "${(double.parse((dataPercent * 100).toStringAsFixed(2)))}%",
                       style: const TextStyle(
                           color: Color(0xFF1EAE98),
                           fontWeight: FontWeight.bold,

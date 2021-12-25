@@ -77,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   color: const Color(0xFF393E46),
                   height: 250,
-                  width: 50,
+                  width: 52.5,
                   child: StreamBuilder<QuerySnapshot>(
                     stream: totalTasksStream,
                     builder: (BuildContext context,
@@ -109,45 +109,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     crossAxisSpacing: 15,
                                     crossAxisCount: 1),
                             itemBuilder: (BuildContext context, int index) {
-                              if (data.size < 5) {
-                                return Container(
-                                    padding: const EdgeInsets.all(8.0),
+                              for (var i = 1; i <= 4; i++) {
+                                if (data.size >= 5 && index == 0) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(2.5),
                                     color: Colors.white.withOpacity(0.1),
                                     child: const Image(
-                                      alignment: Alignment.center,
                                       image:
                                           AssetImage("assets/items/helmet.png"),
-                                    ));
-                              } else if (data.size == 5) {
-                                return Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  color: Colors.yellow.withOpacity(0.5),
-                                  child: const Image(
-                                    alignment: Alignment.center,
-                                    image:
-                                        AssetImage("assets/items/helmet.png"),
-                                  ),
-                                );
-                              } else if (data.size > 5 && data.size < 13) {
-                                return Container(
-                                    padding: const EdgeInsets.all(8.0),
+                                    ),
+                                  );
+                                } else if (data.size >= 13 && index == 1) {
+                                  return Container(
                                     color: Colors.white.withOpacity(0.1),
                                     child: const Image(
-                                      alignment: Alignment.center,
                                       image: AssetImage(
                                           "assets/items/chestplate.png"),
-                                    ));
-                              } else if (data.size == 13) {
-                                return Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    color: Colors.yellow.withOpacity(0.5),
+                                    ),
+                                  );
+                                } else if (data.size >= 20 && index == 2) {
+                                  return Container(
+                                    color: Colors.white.withOpacity(0.1),
                                     child: const Image(
-                                      alignment: Alignment.center,
                                       image: AssetImage(
-                                          "assets/items/chestplate.png"),
-                                    ));
+                                          "assets/items/leggings.png"),
+                                    ),
+                                  );
+                                } else if (data.size >= 24 && index == 2) {
+                                  return Container(
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: const Image(
+                                      image:
+                                          AssetImage("assets/items/boots.png"),
+                                    ),
+                                  );
+                                } else {
+                                  return Container(
+                                    color: Colors.white.withOpacity(0.1),
+                                    child: Container(),
+                                  );
+                                }
                               }
-
                               return Container();
                             },
                           ),
@@ -192,9 +194,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   color: const Color(0xFF393E46),
                   height: 250,
-                  width: 50,
+                  width: 52.5,
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: completedStream,
+                    stream: totalTasksStream,
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
@@ -203,7 +205,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Container(
                           padding: const EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16),
+                            left: 16,
+                            right: 16,
+                            bottom: 16,
+                          ),
                           height: 20,
                           width: MediaQuery.of(context).size.width,
                           color: const Color(0xFF393E46),
@@ -211,27 +216,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: const Color(0xFFFFD369), size: 20),
                         );
                       }
+
+                      final data = snapshot.requireData;
+
                       return SizedBox(
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: GridView.builder(
-                            itemCount: 2,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisSpacing: 137.5,
-                                    crossAxisSpacing: 15,
-                                    crossAxisCount: 1),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  color: Colors.white.withOpacity(0.1),
-                                  child: const Image(
-                                    alignment: Alignment.center,
-                                    image:
-                                        AssetImage("assets/items/helmet.png"),
-                                  ));
-                            },
-                          ),
+                              itemCount: 2,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisSpacing: 137.5,
+                                      crossAxisSpacing: 15,
+                                      crossAxisCount: 1),
+                              itemBuilder: (BuildContext context, int index) {
+                                for (var i = 1; i <= 2; i++) {
+                                  if (data.size >= 40 && index == 0) {
+                                    return Container(
+                                      padding: const EdgeInsets.all(2.0),
+                                      color: Colors.white.withOpacity(0.1),
+                                      child: const Image(
+                                        alignment: Alignment.center,
+                                        image: AssetImage(
+                                            "assets/items/sword.png"),
+                                      ),
+                                    );
+                                  } else if (data.size >= 50 && index == 2) {
+                                    return Container(
+                                      padding: const EdgeInsets.all(2.0),
+                                      color: Colors.white.withOpacity(0.1),
+                                      child: const Image(
+                                        alignment: Alignment.center,
+                                        image: AssetImage(
+                                            "assets/items/torch.png"),
+                                      ),
+                                    );
+                                  } else {
+                                    return Container(
+                                      color: Colors.white.withOpacity(0.1),
+                                      child: Container(),
+                                    );
+                                  }
+                                }
+                                return Container();
+                              }),
                         ),
                       );
                     },
