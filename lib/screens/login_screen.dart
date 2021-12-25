@@ -3,6 +3,7 @@ import 'package:effort_craft/auth/auth_service.dart';
 import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/main_screen.dart';
 import 'package:effort_craft/screens/signup_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -162,57 +163,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: IconButton(
                                   color: Colors.white,
                                   onPressed: () async {
-                                    authService.signInWithEmailAndPassword(
-                                      _emailController.text,
-                                      _passwordController.text,
-                                    );
-                                    if (authService.user != null) {
-                                      setState(() {
-                                        isLoading = true;
-                                      });
-                                      await Future.delayed(
-                                          const Duration(seconds: 1));
-                                      setState(() {
-                                        isLoading = false;
-                                      });
+                                    try {
+                                      authService.signInWithEmailAndPassword(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                      );
+                                    } on FirebaseAuthException catch (error) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              duration: Duration(seconds: 4),
-                                              elevation: 5,
-                                              behavior:
-                                                  SnackBarBehavior.floating,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 35,
-                                                  horizontal: 110),
-                                              shape: StadiumBorder(),
-                                              backgroundColor:
-                                                  Color(0xFF1EAE98),
-                                              content: Text(
-                                                "Welcome Back!",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Color(0xFF393E46),
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                textAlign: TextAlign.center,
-                                              )));
-                                      Get.to(() => const MainScreen());
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              duration: Duration(seconds: 3),
-                                              elevation: 0,
-                                              behavior:
-                                                  SnackBarBehavior.floating,
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 16, horizontal: 12),
-                                              shape: StadiumBorder(),
-                                              backgroundColor: Colors.redAccent,
-                                              content: Text(
-                                                "Please check your email or password!",
-                                                style: TextStyle(fontSize: 18),
-                                                textAlign: TextAlign.center,
-                                              )));
+                                          .showSnackBar(
+                                        SnackBar(
+                                          duration: const Duration(seconds: 4),
+                                          elevation: 0,
+                                          behavior: SnackBarBehavior.floating,
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 16, horizontal: 12),
+                                          shape: const StadiumBorder(),
+                                          backgroundColor: Colors.redAccent,
+                                          content: Text(
+                                            error.message.toString(),
+                                            style:
+                                                const TextStyle(fontSize: 18),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      );
                                     }
                                   },
                                   icon: isLoading
