@@ -333,6 +333,72 @@ class _HomeScreenState extends State<HomeScreen> {
                                   image:
                                       AssetImage("assets/items/chestplate.png"),
                                 ));
+                          } else if (data.size > 13 && data.size < 20) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image:
+                                      AssetImage("assets/items/leggings.png"),
+                                ));
+                          } else if (data.size == 20) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.yellow.withOpacity(0.5),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image:
+                                      AssetImage("assets/items/leggings.png"),
+                                ));
+                          } else if (data.size > 20 && data.size < 24) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image: AssetImage("assets/items/boots.png"),
+                                ));
+                          } else if (data.size == 24) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.yellow.withOpacity(0.5),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image: AssetImage("assets/items/boots.png"),
+                                ));
+                          } else if (data.size > 24 && data.size < 40) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image: AssetImage("assets/items/sword.png"),
+                                ));
+                          } else if (data.size == 40) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.yellow.withOpacity(0.5),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image: AssetImage("assets/items/sword.png"),
+                                ));
+                          } else if (data.size > 40 && data.size < 50) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image: AssetImage("assets/items/torch.png"),
+                                ));
+                          } else if (data.size == 50) {
+                            return Container(
+                                padding: const EdgeInsets.all(8.0),
+                                color: Colors.yellow.withOpacity(0.5),
+                                child: const Image(
+                                  alignment: Alignment.center,
+                                  image: AssetImage("assets/items/torch.png"),
+                                ));
                           }
 
                           return Container();
