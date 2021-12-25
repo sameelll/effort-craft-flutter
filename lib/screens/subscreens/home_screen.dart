@@ -259,7 +259,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               }
                             } else if (data.size > 20 && data.size <= 24) {
-                              if (index <= data.size - 20 && i + index >= 4) {
+                              if (index < data.size - 16 &&
+                                      i + index >= 4 &&
+                                      (index != 7 && index != 4) ||
+                                  (data.size == 24 && index == 8)) {
                                 return Container(
                                   color: Colors.white.withOpacity(0.1),
                                   child: const Image(
