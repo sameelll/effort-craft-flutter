@@ -145,32 +145,74 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: IconButton(
                                     color: Colors.black,
                                     onPressed: () async {
-                                      await authService
-                                          .createUserWithEmailAndPassword(
-                                        _emailController.text,
-                                        _passwordController.text,
-                                      )
-                                          .then((value) {
-                                        if (value != null) {
-                                          FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(value.uid)
-                                              .set({
-                                            "email": value.email,
-                                            "name": (_nameController.text != "")
-                                                ? _nameController.text
-                                                : "anonymous",
-                                          });
-                                          setState(() {
-                                            isLoading = true;
-                                          });
-                                          Future.delayed(
-                                              const Duration(seconds: 3));
-                                          setState(() {
-                                            isLoading = false;
-                                          });
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                      if (_passwordController.text.length < 6) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                duration: Duration(seconds: 4),
+                                                elevation: 0,
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 16,
+                                                    horizontal: 12),
+                                                shape: StadiumBorder(),
+                                                backgroundColor:
+                                                    Colors.redAccent,
+                                                content: Text(
+                                                  "Your password needs to be at least 6 characters long!",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                  textAlign: TextAlign.center,
+                                                )));
+                                      } else if (!_emailController
+                                          .text.isEmail) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            duration: Duration(seconds: 4),
+                                            elevation: 0,
+                                            behavior: SnackBarBehavior.floating,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 16, horizontal: 70),
+                                            shape: StadiumBorder(),
+                                            backgroundColor: Colors.redAccent,
+                                            content: Text(
+                                              "Please enter a valid email!",
+                                              style: TextStyle(fontSize: 18),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        await authService
+                                            .createUserWithEmailAndPassword(
+                                          _emailController.text,
+                                          _passwordController.text,
+                                        )
+                                            .then(
+                                          (value) {
+                                            if (value != null) {
+                                              FirebaseFirestore.instance
+                                                  .collection('users')
+                                                  .doc(value.uid)
+                                                  .set({
+                                                "email": value.email,
+                                                "name":
+                                                    (_nameController.text != "")
+                                                        ? _nameController.text
+                                                        : "anonymous",
+                                              });
+                                              setState(() {
+                                                isLoading = true;
+                                              });
+                                              Future.delayed(
+                                                  const Duration(seconds: 3));
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
                                                   duration:
                                                       Duration(seconds: 4),
                                                   elevation: 0,
@@ -186,52 +228,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                     style:
                                                         TextStyle(fontSize: 18),
                                                     textAlign: TextAlign.center,
-                                                  )));
-                                          Get.to(() => const LoginScreen());
-                                        } else if (_passwordController
-                                                .text.length <
-                                            6) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  duration:
-                                                      Duration(seconds: 4),
-                                                  elevation: 0,
-                                                  behavior:
-                                                      SnackBarBehavior.floating,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 16,
-                                                      horizontal: 12),
-                                                  shape: StadiumBorder(),
-                                                  backgroundColor:
-                                                      Colors.redAccent,
-                                                  content: Text(
-                                                    "Your password needs to be at least 6 characters long!",
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                    textAlign: TextAlign.center,
-                                                  )));
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  duration:
-                                                      Duration(seconds: 4),
-                                                  elevation: 0,
-                                                  behavior:
-                                                      SnackBarBehavior.floating,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 16,
-                                                      horizontal: 12),
-                                                  shape: StadiumBorder(),
-                                                  backgroundColor:
-                                                      Colors.redAccent,
-                                                  content: Text(
-                                                    "This email is already in use. Please use another one.",
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                    textAlign: TextAlign.center,
-                                                  )));
-                                        }
-                                      });
+                                                  ),
+                                                ),
+                                              );
+                                              Get.to(() => const LoginScreen());
+                                            }
+                                          },
+                                        );
+                                      }
                                     },
                                     icon: isLoading
                                         ? const CircularProgressIndicator(
