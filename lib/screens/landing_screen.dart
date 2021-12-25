@@ -47,11 +47,11 @@ class _LandingScreenState extends State<LandingScreen> {
                   children: [
                     SizedBox(
                       child: Text('Effortcraft',
-                          style: GoogleFonts.caveat(
+                          style: GoogleFonts.lato(
                             textStyle: TextStyle(
                                 color:
                                     const Color(0xFFFFD369).withOpacity(0.85),
-                                fontSize: 63,
+                                fontSize: 45,
                                 fontWeight: FontWeight.bold),
                           )),
                     ),
@@ -61,10 +61,10 @@ class _LandingScreenState extends State<LandingScreen> {
                     SizedBox(
                       child: Text(
                         'Reflect Your Effort!',
-                        style: GoogleFonts.caveat(
+                        style: GoogleFonts.lato(
                           textStyle: TextStyle(
                               color: const Color(0xFF7CD1B8).withOpacity(0.9),
-                              fontSize: 21,
+                              fontSize: 17,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -73,43 +73,28 @@ class _LandingScreenState extends State<LandingScreen> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.07,
-              ),
-              Container(
-                height: 350,
+                height: 440,
               ),
               Column(
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Container(
+                    MaterialButton(
+                      onPressed: () {
+                        Get.to(() => const LoginScreen());
+                      },
                       height: 50,
-                      width: 112,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffebebeb).withOpacity(0.2),
-                        borderRadius: const BorderRadius.only(
+                      color: const Color(0xFFFFD369),
+                      child: Text("Start",
+                          style: GoogleFonts.lato(
+                            textStyle: const TextStyle(
+                                color: Color(0xFF105652),
+                                fontWeight: FontWeight.w900,
+                                fontSize: 25),
+                          )),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30),
                             bottomLeft: Radius.circular(30)),
-                      ),
-                      child: MaterialButton(
-                        onPressed: () {
-                          Get.to(() => const LoginScreen());
-                        },
-                        height: 50,
-                        color: const Color(0xFFFFD369),
-                        child: Text("Start",
-                            style: GoogleFonts.caveat(
-                              textStyle: const TextStyle(
-                                  color: Color(0xFF105652),
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 30.0),
-                            )),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 2, horizontal: 2),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              bottomLeft: Radius.circular(30)),
-                        ),
                       ),
                     )
                   ]),

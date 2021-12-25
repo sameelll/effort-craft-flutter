@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: MediaQuery.of(context).size.width,
               height: 56,
               child: Text('Tasks',
-                  style: GoogleFonts.caveat(
+                  style: GoogleFonts.lato(
                     textStyle:
                         const TextStyle(color: Color(0xFF1EAE98), fontSize: 38),
                   )),
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                             'Your shulker seems empty.\nPlease add some tasks!',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.caveat(
+                            style: GoogleFonts.lato(
                               textStyle: TextStyle(
                                 color: const Color(0xFFFFD369).withOpacity(0.9),
                                 fontSize: 30,

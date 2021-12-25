@@ -56,7 +56,7 @@ class _AchivementsScreenState extends State<AchivementsScreen> {
               height: 56,
               child: Text(
                 'Achivements',
-                style: GoogleFonts.caveat(
+                style: GoogleFonts.lato(
                   textStyle:
                       const TextStyle(color: Color(0xFF1EAE98), fontSize: 34),
                 ),

@@ -18,7 +18,7 @@ class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
     return AppBar(
       title: Center(
         child: Text("Effortcraft",
-            style: GoogleFonts.caveat(
+            style: GoogleFonts.lato(
                 textStyle: const TextStyle(
               color: Color(0xff903749),
               fontWeight: FontWeight.bold,

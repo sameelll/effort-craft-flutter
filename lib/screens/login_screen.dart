@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:effort_craft/auth/auth_service.dart';
 import 'package:effort_craft/screens/landing_screen.dart';
 import 'package:effort_craft/screens/main_screen.dart';
@@ -50,13 +49,13 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 35, top: 161),
+              padding: const EdgeInsets.only(left: 35, top: 173),
               child: Text(
                 'Welcome\nBack',
-                style: GoogleFonts.caveat(
+                style: GoogleFonts.lato(
                   textStyle: const TextStyle(
                       color: Color(0xFF1EAE98),
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -118,11 +117,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text(
                                   'Sign Up',
                                   textAlign: TextAlign.left,
-                                  style: GoogleFonts.caveat(
+                                  style: GoogleFonts.lato(
                                     textStyle: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Color(0xFFFFD369),
-                                        fontSize: 20),
+                                        fontSize: 17),
                                   ),
                                 ),
                                 style: const ButtonStyle(),
@@ -130,13 +129,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextButton(
                                 onPressed: () {},
                                 child: Text(
-                                  'Forgat Password?',
+                                  'Forget Password?',
                                   textAlign: TextAlign.left,
-                                  style: GoogleFonts.caveat(
+                                  style: GoogleFonts.lato(
                                     textStyle: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Color(0xFFFFD369),
-                                        fontSize: 20),
+                                        fontSize: 17),
                                   ),
                                 ),
                               ),
@@ -150,10 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               Text(
                                 'Sign In',
-                                style: GoogleFonts.caveat(
+                                style: GoogleFonts.lato(
                                   textStyle: const TextStyle(
                                       color: Color(0xFF1EAE98),
-                                      fontSize: 35,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ),
@@ -168,6 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         _emailController.text,
                                         _passwordController.text,
                                       );
+                                      Get.to(() => const MainScreen());
                                     } on FirebaseAuthException catch (error) {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

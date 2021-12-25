@@ -52,10 +52,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.only(left: 35, top: 34),
               child: Text(
                 'Create\nAccount',
-                style: GoogleFonts.caveat(
+                style: GoogleFonts.lato(
                   textStyle: const TextStyle(
                       color: Color(0xFF1EAE98),
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -132,10 +132,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               Text(
                                 'Sign Up',
-                                style: GoogleFonts.caveat(
+                                style: GoogleFonts.lato(
                                   textStyle: const TextStyle(
                                       color: Color(0xFFFFD369),
-                                      fontSize: 35,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.w700),
                                 ),
                               ),
@@ -260,11 +260,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: Text(
                                   'Sign In',
                                   textAlign: TextAlign.left,
-                                  style: GoogleFonts.caveat(
+                                  style: GoogleFonts.lato(
                                     textStyle: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Color(0xFF1EAE98),
-                                        fontSize: 24),
+                                        fontSize: 17),
                                   ),
                                 ),
                                 style: const ButtonStyle(),

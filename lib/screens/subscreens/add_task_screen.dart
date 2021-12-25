@@ -103,7 +103,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         height: 56,
                         child: Text(
                           'Add a task',
-                          style: GoogleFonts.caveat(
+                          style: GoogleFonts.lato(
                             textStyle: const TextStyle(
                                 color: Color(0xFF1EAE98), fontSize: 34),
                           ),
