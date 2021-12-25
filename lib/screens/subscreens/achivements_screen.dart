@@ -58,7 +58,7 @@ class _AchivementsScreenState extends State<AchivementsScreen> {
                 'Achivements',
                 style: GoogleFonts.lato(
                   textStyle:
-                      const TextStyle(color: Color(0xFF1EAE98), fontSize: 34),
+                      const TextStyle(color: Color(0xFF1EAE98), fontSize: 30),
                 ),
               ),
             )

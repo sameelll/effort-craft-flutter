@@ -105,7 +105,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           'Add a task',
                           style: GoogleFonts.lato(
                             textStyle: const TextStyle(
-                                color: Color(0xFF1EAE98), fontSize: 34),
+                                color: Color(0xFF1EAE98), fontSize: 30),
                           ),
                         ),
                       )

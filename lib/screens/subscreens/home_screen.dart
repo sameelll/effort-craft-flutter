@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text('Tasks',
                   style: GoogleFonts.lato(
                     textStyle:
-                        const TextStyle(color: Color(0xFF1EAE98), fontSize: 38),
+                        const TextStyle(color: Color(0xFF1EAE98), fontSize: 30),
                   )),
             )
           ],

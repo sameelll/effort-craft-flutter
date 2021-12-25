@@ -22,7 +22,7 @@ class AppBarFb2 extends StatelessWidget with PreferredSizeWidget {
                 textStyle: const TextStyle(
               color: Color(0xff903749),
               fontWeight: FontWeight.bold,
-              fontSize: 34,
+              fontSize: 30,
             ))),
       ),
       backgroundColor: Colors.blueGrey.shade300,
