@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: GoogleFonts.lato(
                               textStyle: TextStyle(
                                 color: const Color(0xFFFFD369).withOpacity(0.9),
-                                fontSize: 30,
+                                fontSize: 24,
                               ),
                             )),
                       )

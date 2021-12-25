@@ -130,14 +130,14 @@ class _CompletedScreenState extends State<CompletedScreen> {
                         alignment: Alignment.center,
                         color: const Color(0xFF393E46),
                         width: 300,
-                        height: 74,
+                        height: 100,
                         child: Text(
                             "You haven't completed a task yet.\nPlease make effort!",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.lato(
                               textStyle: TextStyle(
                                 color: const Color(0xFFFFD369).withOpacity(0.9),
-                                fontSize: 20,
+                                fontSize: 24,
                               ),
                             )),
                       )

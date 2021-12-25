@@ -300,7 +300,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   return Center(
                       child: CardFb12(
                     image: "assets/steve.png",
-                    text: "Total Effort: ${data.size.toString()}",
+                    text: "Total Efforts: ${data.size.toString()}",
                     onPressed: () {},
                     color: const Color(0xFFFFD369),
                   ));
