@@ -135,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           "assets/items/leggings.png"),
                                     ),
                                   );
-                                } else if (data.size >= 24 && index == 2) {
+                                } else if (data.size >= 24 && index == 3) {
                                   return Container(
                                     color: Colors.white.withOpacity(0.1),
                                     child: const Image(
@@ -241,9 +241,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             "assets/items/sword.png"),
                                       ),
                                     );
-                                  } else if (data.size >= 50 && index == 2) {
+                                  } else if (data.size >= 50 && index == 1) {
                                     return Container(
-                                      padding: const EdgeInsets.all(2.0),
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(6.0),
                                       color: Colors.white.withOpacity(0.1),
                                       child: const Image(
                                         alignment: Alignment.center,

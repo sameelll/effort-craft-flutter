@@ -238,6 +238,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Container(),
                                 );
                               }
+                            } else if (data.size > 13 && data.size <= 20) {
+                              if (index < data.size - 13 &&
+                                      index != 7 &&
+                                      index != 4 ||
+                                  (data.size == 18 && index == 5) ||
+                                  (data.size == 19 && index == 6) ||
+                                  (data.size == 20 && index == 8)) {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image:
+                                        AssetImage("assets/items/diamond.png"),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: Container(),
+                                );
+                              }
+                            } else if (data.size > 20 && data.size <= 24) {
+                              if (index <= data.size - 20 && i + index >= 4) {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image:
+                                        AssetImage("assets/items/diamond.png"),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: Container(),
+                                );
+                              }
                             }
                           }
                           return Container(

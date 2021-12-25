@@ -123,23 +123,26 @@ class _AchivementsScreenState extends State<AchivementsScreen> {
                   final data = snapshot.requireData;
 
                   late double dataPercent;
-                  late int level;
+                  late String level;
 
                   if (data.size <= 5) {
                     dataPercent = data.size / 5;
-                    level = 1;
+                    level = 1.toString();
                   } else if (data.size > 5 && data.size <= 13) {
                     dataPercent = (data.size - 5) / 8;
-                    level = 2;
+                    level = 2.toString();
                   } else if (data.size > 13 && data.size <= 20) {
-                    level = 3;
+                    level = 3.toString();
                     dataPercent = (data.size - 13) / 7;
                   } else if (data.size > 20 && data.size <= 24) {
-                    level = 4;
+                    level = 4.toString();
                     dataPercent = (data.size - 20) / 4;
                   } else if (data.size > 24 && data.size <= 40) {
-                    level = 5;
+                    level = 5.toString();
                     dataPercent = (data.size - 24) / 16;
+                  } else {
+                    level = "Full";
+                    dataPercent = 1;
                   }
 
                   return CircularPercentIndicator(
