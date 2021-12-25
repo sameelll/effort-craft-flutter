@@ -95,17 +95,55 @@ class _CompletedScreenState extends State<CompletedScreen> {
 
               final data = snapshot.requireData;
 
-              return ListView.builder(
-                itemCount: data.size,
-                itemBuilder: (context, index) {
-                  return CompletedCard(
-                    title: '${data.docs[index]['title']}',
-                    body: '${data.docs[index]['task']}',
-                    delete: () {
-                      data.docs[index].reference.delete();
-                    },
-                  );
-                },
+              if (data.size > 0) {
+                return ListView.builder(
+                  itemCount: data.size,
+                  itemBuilder: (context, index) {
+                    return CompletedCard(
+                      title: '${data.docs[index]['title']}',
+                      body: '${data.docs[index]['task']}',
+                      delete: () {
+                        data.docs[index].reference.delete();
+                      },
+                    );
+                  },
+                );
+              }
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 250,
+                    height: 250,
+                    child: Image(
+                      image: AssetImage("assets/skeleton.png"),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        color: const Color(0xFF393E46),
+                        width: 300,
+                        height: 74,
+                        child: Text(
+                            "You haven't completed a task yet.\nPlease make effort!",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.caveat(
+                              textStyle: TextStyle(
+                                color: const Color(0xFFFFD369).withOpacity(0.9),
+                                fontSize: 20,
+                              ),
+                            )),
+                      )
+                    ],
+                  ),
+                ],
               );
             },
           ),

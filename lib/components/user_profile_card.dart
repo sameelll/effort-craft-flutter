@@ -44,7 +44,7 @@ class CardFb11 extends StatelessWidget {
                 style: const TextStyle(
                   color: Color(0xFF393E46),
                   fontWeight: FontWeight.w900,
-                  fontSize: 30,
+                  fontSize: 20,
                 )),
           ],
         ),

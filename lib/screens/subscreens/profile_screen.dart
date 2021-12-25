@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .get()
         .then((ds) {
       name = ds.get("name");
-    });
+    }).catchError((e) {});
   }
 
   @override

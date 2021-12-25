@@ -309,6 +309,45 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Container(),
                                 );
                               }
+                            } else if (data.size > 40 && data.size <= 50) {
+                              if ((index < (data.size - 40)) &&
+                                      i + index >= 4 &&
+                                      index != 2 &&
+                                      index != 3 &&
+                                      index != 4 &&
+                                      index != 5 &&
+                                      index != 6 &&
+                                      index != 8 ||
+                                  (data.size == 45 && index == 1)) {
+                                return Container(
+                                  padding: const EdgeInsets.all(4.7),
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image: AssetImage("assets/items/stick.png"),
+                                  ),
+                                );
+                              } else if ((data.size == 50) && index == 4) {
+                                return Container(
+                                  padding: const EdgeInsets.all(4.7),
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: const Image(
+                                    image: AssetImage("assets/items/coal.png"),
+                                  ),
+                                );
+                              } else {
+                                return Container(
+                                  color: Colors.white.withOpacity(0.1),
+                                  child: Container(),
+                                );
+                              }
+                            } else if (data.size > 50) {
+                              return Container(
+                                padding: const EdgeInsets.all(2.0),
+                                color: Colors.white.withOpacity(0.1),
+                                child: const Image(
+                                  image: AssetImage("assets/items/diamond.png"),
+                                ),
+                              );
                             }
                           }
                           return Container(
@@ -470,6 +509,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   alignment: Alignment.center,
                                   image: AssetImage("assets/items/torch.png"),
                                 ));
+                          } else if (data.size > 50) {
+                            return Container(
+                              padding: const EdgeInsets.all(8.0),
+                              color: Colors.blueGrey,
+                              child: const Image(
+                                alignment: Alignment.center,
+                                image: AssetImage(
+                                    "assets/items/diamond_block.png"),
+                              ),
+                            );
                           }
 
                           return Container();
