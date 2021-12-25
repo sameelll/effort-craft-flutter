@@ -75,31 +75,40 @@ class _LandingScreenState extends State<LandingScreen> {
               Container(
                 height: 440,
               ),
-              Column(
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    MaterialButton(
+              Column(children: [
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xFFFFD369), Color(0xFFFFD369)])),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          alignment: Alignment.center,
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.only(
+                                  right: 25, left: 25, top: 5, bottom: 5)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)),
+                          )),
                       onPressed: () {
                         Get.to(() => const LoginScreen());
                       },
-                      height: 50,
-                      color: const Color(0xFFFFD369),
-                      child: Text("Start",
-                          style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
-                                color: Color(0xFF105652),
-                                fontWeight: FontWeight.w900,
-                                fontSize: 25),
-                          )),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            bottomLeft: Radius.circular(30)),
+                      child: Text(
+                        "Start",
+                        style: TextStyle(
+                            color: Colors.grey.shade800,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
                       ),
-                    )
-                  ]),
-                ],
-              ),
+                    ),
+                  ),
+                ])
+              ]),
             ],
           ),
         ),
