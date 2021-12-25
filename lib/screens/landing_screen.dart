@@ -72,42 +72,43 @@ class _LandingScreenState extends State<LandingScreen> {
                   ],
                 ),
               ),
-              Container(
-                height: 440,
+              const SizedBox(
+                height: 450,
               ),
-              Column(children: [
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        gradient: const LinearGradient(
-                            colors: [Color(0xFFFFD369), Color(0xFFFFD369)])),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          elevation: MaterialStateProperty.all(0),
-                          alignment: Alignment.center,
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.only(
-                                  right: 25, left: 25, top: 5, bottom: 5)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.transparent),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)),
-                          )),
-                      onPressed: () {
-                        Get.to(() => const LoginScreen());
-                      },
-                      child: Text(
-                        "Start",
-                        style: TextStyle(
-                            color: Colors.grey.shade800,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: const Color(0xFF16222A).withOpacity(0.9).withRed(30),
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
+                        alignment: Alignment.center,
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.only(
+                                right: 27, left: 27, top: 5, bottom: 5)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25)),
+                        )),
+                    onPressed: () {
+                      Get.to(() => const LoginScreen());
+                    },
+                    child: Text(
+                      "Start",
+                      style: TextStyle(
+                          color: const Color(0xFFFFD369).withOpacity(0.90),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 26),
                     ),
                   ),
-                ])
+                ),
+                const SizedBox(
+                  width: 3,
+                )
               ]),
             ],
           ),
